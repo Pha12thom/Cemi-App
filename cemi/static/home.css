@@ -5,8 +5,11 @@
     box-sizing: border-box;
 }
 */
+
+/* Custom CSS */
 header img {
     width: 30px;
+    margin-left: 500px;
 }
 body {
     font-family: Arial, sans-serif;
