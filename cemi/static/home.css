@@ -7,6 +7,7 @@
 */
 
 /* Custom CSS */
+
 header img {
     width: 30px;
     margin-left: 1100px;
@@ -64,7 +65,9 @@ main {
 }
 
 .products {
+    display: flex;
     margin-top: 50px;
+    justify-content: space-evenly;
 }
 
 .product {
@@ -81,4 +84,13 @@ footer {
     color: #fff;
     text-align: center;
     padding: 20px;
+}
+section {
+    display: flex;
+    justify-content: 30px;
+    margin-top: 50px;
+}
+.feature {
+    margin-bottom: 20px;
+    text-align: center;
 }
