@@ -23,7 +23,7 @@
         <img src="{{ item.images }}" height="200px" width="200px"  alt="{{ item.name }}">
         <p>{{ item.description }}</p>
         <p class="price">${{ item.price }}</p>
-        <a href="#" class="btn">View Product</a>
+        <a href="{% url 'details' item.id %}" class="btn">view item</a>
     </div>
     {% endfor %}
     <!-- Featured products content here -->
