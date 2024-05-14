@@ -17,6 +17,14 @@
 </section>
 <section class="products">
     <h2>Featured Products</h2>
+    {% for item in items_page %}
+    <div class="product">  
+        <img src="{{ item.images }}" alt="{{ item.name }}">
+        <p>{{ item.description }}</p>
+        <p class="price">${{ item.price }}</p>
+        <a href="#">View Product</a>
+    </div>
+    {% endfor %}
     <!-- Featured products content here -->
 </section>
 {% endblock %}
