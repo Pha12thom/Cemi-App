@@ -14,4 +14,26 @@ def home(request):
     return render(request, 'home.html', context)
 
 
-# Create your views here.
+
+def base(request):
+    user_page = user.objects.all()
+    store_page = Store.objects.all()
+    items_page = items.objects.all()
+    context = {
+        'user_page': user_page,
+        'store_page': store_page,
+        'items_page': items_page,
+    }
+    return render(request, 'base.html', context)
+
+def cart(request):
+    user_page = user.objects.all()
+    store_page = Store.objects.all()
+    items_page = items.objects.all()
+    context = {
+        'user_page': user_page,
+        'store_page': store_page,
+        'items_page': items_page,
+    }
+    return render(request, 'cart.html', context)
+
