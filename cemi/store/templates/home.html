@@ -15,14 +15,15 @@
     Welcome to cemi Online Store, your one-stop destination for all your home equipment needs. Whether you're looking for kitchen appliances, furniture, electronics, or any other essential items for your home, we have a wide range of high-quality products to choose from. Our store is designed to provide you with a seamless shopping experience, allowing you to browse through our extensive collection and find exactly what you're looking for. With our user-friendly interface and secure payment options, you can shop with confidence and convenience. We are committed to delivering exceptional customer service and ensuring your satisfaction with every purchase. So why wait? Start exploring our featured products and discover the perfect additions to your home today. Shop now and transform your living space into a haven of comfort and style.</p>
     <img src="{% static 'main.jpg' %}" alt="Hero Image">
 </section>
+<div class="feature"><h2>Featured Products</h2></div>
 <section class="products">
-    <h2>Featured Products</h2>
+   
     {% for item in items_page %}
     <div class="product">  
-        <img src="{{ item.images }}" alt="{{ item.name }}">
+        <img src="{{ item.images }}" height="200px" width="200px"  alt="{{ item.name }}">
         <p>{{ item.description }}</p>
         <p class="price">${{ item.price }}</p>
-        <a href="#">View Product</a>
+        <a href="#" class="btn">View Product</a>
     </div>
     {% endfor %}
     <!-- Featured products content here -->
