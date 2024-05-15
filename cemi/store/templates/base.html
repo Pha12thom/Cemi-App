@@ -12,18 +12,19 @@
         <h1>{% block heading %}{% endblock %}</h1>
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li><a href="#">Shop</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Contact</a></li>
-               
-                <li><a href="#"><img src="{% static 'cart.png' %}" alt="Shopping Cart"></a></li>
+                <li><a href="{% url 'cart' %}"><img src="{% static 'cart.png' %}" alt="Shopping Cart"></a></li>
+                
                 {% for users in user_page %}
-                <li><a href='#'>balance ${{ users.balance }}</a></li>
+                <li><a href='#'> ${{ users.balance }}</a></li>
                 <li><a href='#'> {{ users.name }} </a></li>
                 {% endfor %}
         </ul>
     </nav>
+    <form class="search-form" method="GET"><input type="text" id="search-box" name="search" width="250px" "Search..."><label for="search">Search</label></form>
         </div>
     </header>
     <main>
@@ -31,7 +32,7 @@
     </main>
     
     <footer>
-        <p>&copy; {% now "Y" %} Your Store. All rights reserved.</p>
+        <p>&copy; {% now "Y" %} Cemi Store. All rights reserved.</p>
     </footer>
     <script src="{% static 'js/scripts.js' %}"></script>
 </body>

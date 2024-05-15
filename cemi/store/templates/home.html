@@ -2,7 +2,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Home - Your Store{% endblock %}
-{% block heading %}Welcome to Your Store{% endblock %}
+{% block heading %}Welcome to Cemi online Store{% endblock %}
 
 {% block content %}
 {% for users in user_page %}
@@ -22,7 +22,7 @@
     <div class="product">  
         <img src="{{ item.images }}" height="200px" width="200px"  alt="{{ item.name }}">
         <p>{{ item.description }}</p>
-        <p class="price">${{ item.price }}</p>
+        <p class="price">ksh. {{ item.price }}</p>
         <a href="{% url 'details' item.id %}" class="btn">view item</a>
     </div>
     {% endfor %}

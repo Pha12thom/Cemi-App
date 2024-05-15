@@ -40,3 +40,13 @@ class items(models.Model):
 
     def __str__(self):
         return self.name
+
+class cart(models.Model):
+    user = models.ForeignKey(user, on_delete=models.CASCADE)
+    item = models.ForeignKey(items, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return "{self.user} - {self.item} - {self.quantity}"

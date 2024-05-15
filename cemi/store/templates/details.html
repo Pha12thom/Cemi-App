@@ -8,13 +8,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <img src="{{ item.images }}" height="200px" width="200px"  alt="{{ item.name }}">
+                <img src="{{ item.images.url }}" height="200px" width="200px"  alt="{{ item.name }}">
                 <h2>{{ item.name }}</h2>
                 <p>{{ item.description }}</p>
-                <p class="price">${{ item.price }}</p>
+                <p class="price">ksh.{{ item.price }}</p>
                 <a href="{% url 'add_to_cart' item.id %}" class="btn btn-primary">Add to Cart</a>
             </div>
-          
         </div>
     </div>
 {% endblock %}

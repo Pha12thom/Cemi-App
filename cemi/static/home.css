@@ -1,10 +1,9 @@
-/* Resetting default margin and padding 
+/* Resetting default margin and padding */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-*/
 
 /* Custom CSS */
 
@@ -93,4 +92,10 @@ section {
 .feature {
     margin-bottom: 20px;
     text-align: center;
+}
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
 }

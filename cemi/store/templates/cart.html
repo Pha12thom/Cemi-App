@@ -1,38 +1,9 @@
 {% extends 'base.html' %}
+
 {% load static %}
 {% block title %}Cart - Your Store{% endblock %}
 {% block heading %}Your Cart{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Your Cart</h2>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Product</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for item in cart_items %}
-                        <tr>
-                            <td>{{ item.name }}</td>
-                            <td>${{ item.price }}</td>
-                            <td>{{ item.quantity }}</td>
-                            <td>${{ item.total }}</td>
-                            <td><a href="#" class="btn btn-danger">Remove</a></td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                <p>Total: ${{ total }}</p>
-                <a href="#" class="btn btn-primary">Checkout</a>
-            </div>
-        </div>
-    </div>
-{% endblock %
+
+{% endblock %}
