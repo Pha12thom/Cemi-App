@@ -94,8 +94,74 @@ section {
     text-align: center;
 }
 form {
+    display: block;
+    margin-top: 50px;
+    border: #333 5px solid;
+    padding: 50px;
+}
+/* cart.css */
+
+.cart-container {
+    margin: 20px;
+}
+
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cart-table th, .cart-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.cart-table th {
+    background-color: #f2f2f2;
+}
+
+.reduce-button {
+    background-color: #f44336;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.reduce-button:hover {
+    background-color: #d32f2f;
+}
+
+.checkout-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+.checkout-button:hover {
+    background-color: #45a049;
+}
+.split-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 50px;
+    height: 100vh;
+    border: 10px solid rgb(47, 89, 167);
+    padding: ;
 }
+
+.left-section, .right-section {
+    flex: 1;
+    padding: 20px;
+}
+
+.app-image {
+    width: 100%;
+    max-width: 300px;
+}
+
+/* Add more styling as needed */

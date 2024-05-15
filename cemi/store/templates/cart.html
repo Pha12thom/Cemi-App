@@ -2,37 +2,41 @@
 {% block title %}Cart{% endblock %}
 {% block content %}
 {% if cart %}
-    <h1>Your Cart</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Item</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item_id, item_info in cart.cart.items %}
-            <tr>
-                <td>{{ item_info.name }}</td>
-                <td>{{ item_info.price }}</td>
-                <td>{{ item_info.quantity }}</td>
-                <td>{{ item_info.total }}</td>
-                <td>
-                    <form action="{% url 'reduce_item_quantity' item_id=item_id %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit">Reduce Quantity</button>
-                    </form>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <p> Quantity of items: {{ total_quantity }}</p>
-    <p>Total: ksh {{ cart.get_total }}</p>
-    <a href="{% url 'checkout' %}">Proceed to Checkout</a>
+    <div class="cart-container">
+        <h1>Your Cart</h1>
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item_id, item_info in cart.cart.items %}
+                <tr>
+                    <td><img src="{{ item_info.image.url }}" alt="{{ item_info.name }}" class="item-image"></td>
+                    <td>{{ item_info.name }}</td>
+                    <td>{{ item_info.price }}</td>
+                    <td>{{ item_info.quantity }}</td>
+                    <td>{{ item_info.total }}</td>
+                    <td>
+                        <form action="{% url 'reduce_item_quantity' item_id=item_id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="reduce-button">Reduce Quantity</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p class="cart-summary">Quantity of items: {{ total_quantity }}</p>
+        <p class="cart-summary">Total: ksh {{ cart.get_total }}</p>
+        <a href="{% url 'checkout' %}" class="checkout-button">Proceed to Checkout</a>
+    </div>
 {% else %}
     <p>Your cart is empty.</p>
 {% endif %}

@@ -1,17 +1,25 @@
-{% extends 'base.html' %}
-
-{% block title %}Register - Your Store{% endblock %}
-{% block heading %}Register{% endblock %}
+{% extends 'main.html' %}
+{% block title %}User Registration{% endblock %}
 
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    <h2>User Registration</h2>
-    {{ form.as_p }}
-    <button type="submit">Register</button>
-    <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
-</form>
-{% endblock %}
+<div class="container">
+    <div class="form-container">
+        <h1>Create an Account</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            
+            <button type="submit">Register</button>
 
-{% block scripts %}
+
+        </form>
+        <br><br>
+        <p>already have an account?<a href="{% url 'login' %}"> login</a></p>
+    </div>
+    <div class="description">
+        <h2>Welcome to Cemi Shop</h2>
+        <p>Discover the latest trends and shop your favorite products hassle-free.</p>
+    </div>
+</div>
+
 {% endblock %}

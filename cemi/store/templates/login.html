@@ -1,26 +1,23 @@
-{% extends 'base.html' %}
-
-{% block title %}Login - Your Store{% endblock %}
-{% block heading %}Login{% endblock %}
+{% extends 'main.html' %}
+{% block title %}User Login{% endblock %}
 
 {% block content %}
-<form method="POST" action="{% url 'home' %}">
-    <h2>Login</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" id="login-btn">Login</button>
-    </form>
-    <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
-    {% if error_message %}
-        <p class="error-message">{{ error_message }}</p>
-    {% endif %}
+<div class="container">
+    <div class="form-container">
+        <h1>Welcome Back!</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" id="login-btn">Login</button>
+        </form>
+        <br><br>
+        <p> Don't have an account?<a href="{% url 'register' %}"> Register</a></p>
+    </div>
+    <div class="description">
+        <h2>Continue Shopping</h2>
+        <p>Log in to access your account and explore our latest offers.</p>
+    </div>
+    
 </div>
-{% block scripts %}
-<script>
-    document.getElementById('login-btn').addEventListener('click', function() {
-        document.getElementById('spinner').style.display = 'inline-block';
-    });
-</script>
 {% endblock %}
-{% endblock %}
+

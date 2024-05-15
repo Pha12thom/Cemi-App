@@ -1,50 +1,48 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Store, items, user
+from .models import Store, items, UserProfile
 from .cart import Cart
 from django.contrib import messages
 from django.http import JsonResponse
-from .forms import RegisterForm, LoginForm, LogoutForm
+from .forms import RegisterForm, LoginForm, LogoutForm, UserProfileForm
 from decimal import Decimal
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 
 
 def register(request):
-    form = RegisterForm()
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            confirm_password = form.cleaned_data['confirm_password']
-            if password == confirm_password:
-                user.objects.create(username=username, email=email, password=password)
-                messages.success(request, 'Account created successfully')
-                return redirect('login')
-            else:
-                messages.error(request, 'Passwords do not match')
-    context = {
-        'form': form,
-    }
-    return render(request, 'register.html', context)
+            # Create the user
+            user = User.objects.create(username=username, email=email, password=password)
+            # Log in the user after successful registration
+            return redirect('login')  # Redirect to the home page
+    else:
+        form = RegisterForm()
+    return render(request, 'register.html', {'form': form})
 
-
-def login(request):
-    form = LoginForm()
+def login(request): 
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            if user.objects.filter(username=username, password=password).exists():
-                messages.success(request, 'Login successful')
-                return redirect('home')
+            User = authenticate(request, username=username, password=password)
+            if User is not None:
+                return redirect('base')
             else:
-                messages.error(request, 'Username or password is incorrect')
-    context = {
-        'form': form,
-    }
-    return render(request, 'login.html', context)
+                return render(request, 'login.html', {'form': form, 'error_message': 'Invalid username or password.'})
+    else:
+        form = LoginForm()
+        return render(request, 'login.html', {'form': form})
+
+
+
 
 def logout(request):
     form = LogoutForm()
@@ -60,7 +58,7 @@ def logout(request):
 
 
 def home(request):
-    user_page = user.objects.all()
+    user_page = UserProfile.objects.all()
     store_page = Store.objects.all()
     items_page = items.objects.all()
     context = {
@@ -73,19 +71,25 @@ def home(request):
 
 
 def base(request):
-    user_page = user.objects.all()
+    cart = Cart(request)
+    total_quantity = sum(item['quantity'] for item in cart.cart.values())
+    user_page = UserProfile.objects.all()
     store_page = Store.objects.all()
     items_page = items.objects.all()
+    
     context = {
         'user_page': user_page,
         'store_page': store_page,
         'items_page': items_page,
+        'total_quantity': total_quantity,
+        'cart': cart,
     }
     return render(request, 'base.html', context)
 
+
 def details(request, item_id):
     item = get_object_or_404(items, pk=item_id)
-    user_page = user.objects.all()
+    user_page = UserProfile.objects.all()
     store_page = Store.objects.all()
     items_page = items.objects.all()
     context = {
@@ -96,33 +100,7 @@ def details(request, item_id):
     }
     
     return render(request, 'details.html', context)
-"""
-def cart(request):
-    user_page = user.objects.all()
-    store_page = Store.objects.all()
-    items_page = items.objects.all()
-    context = {
-        'user_page': user_page,
-        'store_page': store_page,
-        'items_page': items_page,
-        
-    }
-    return render(request, 'cart.html', context)
-"""
 
-
-"""def add_to_cart(request, item_id):
-    cart = Cart(request)
-    if request.POST.get('action') == 'post':
-        item_id = int(request.POST.get('item_id'))
-        item = get_object_or_404(items, id=item_id)
-        cart.add(item=item)
-        response = JsonResponse({'qty': item.name, 'price': item.price})
-        return response
-        """
-from django.shortcuts import render, redirect
-from .cart import Cart
-from decimal import Decimal
 
 def cart(request):
     cart = Cart(request)
@@ -140,7 +118,7 @@ def reduce_item_quantity(request, item_id):
 
 
 def checkout(request):
-    # Implement your checkout logic here
+    
     return render(request, 'checkout.html')
 
 
@@ -148,6 +126,16 @@ def add_to_cart(request, item_id):
     item = get_object_or_404(items, id=item_id)
     cart = Cart(request)
     cart.add(item)
-    # Calculate total price for the added item
     total_price = Decimal(item.price) * cart.cart[str(item_id)]['quantity']
-    return redirect('cart')  # Redirect to the cart page after adding the item
+    return redirect('cart') 
+
+def profile(request):
+    user_profile = UserProfile.objects.get(user=request.User)
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=user_profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')  # Redirect to the profile page after saving
+    else:
+        form = UserProfileForm(instance=user_profile)
+    return render(request, 'profile.html', {'form': form})

@@ -1,6 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-class user(models.Model):
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     email = models.EmailField()
     password = models.CharField(max_length=100)
@@ -10,7 +12,7 @@ class user(models.Model):
     balance = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
 
     def __str__(self):
-        return "{self.name} - {self.email} - {self.balance} - {self.spent}"
+        return {self.name} 
     
     
 # Create your models here.
@@ -42,7 +44,7 @@ class items(models.Model):
         return self.name
 
 class cart(models.Model):
-    user = models.ForeignKey(user, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     item = models.ForeignKey(items, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -50,3 +52,14 @@ class cart(models.Model):
 
     def __str__(self):
         return "{self.user} - {self.item} - {self.quantity}"
+    
+def edit_profile(request):
+    user_profile = UserProfile.objects.get(user=request.user)
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=user_profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')  # Redirect to the profile page after saving
+    else:
+        form = UserProfileForm(instance=user_profile)
+    return render(request, 'profile.html', {'form': form})
