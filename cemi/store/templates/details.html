@@ -1,39 +1,19 @@
+
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Details - Your Store{% endblock %}
+{% block title %}Details - Your Store {% endblock %}
 {% block heading %}Product Details{% endblock %}
 
 {% block content %}
-<form method="POST">
-    {% csrf_token %}
-    <div class="product-details">
-        <img src="{{ item.images.url }}" alt="{{ item.name }}">
-        <h2>{{ item.name }}</h2>
-        <p>{{ item.description }}</p>
-        <p class="price">ksh. {{ item.price }}</p>
-        <button id="add-cart" type="submit" value="{{ item.id }}" class="btn">Add to Cart</button>
-    </div>
-</form>
-
-    <script>
-        $(document).on('click', '#add-cart', function(e){
-            e.preventDefault();
-            $.ajax({
-                url: '{% url "add_to_cart" %}',
-                type: 'POST',
-                data: {
-                    item_id: item_id,
-                        csrfmiddlewaretoken: '{{ csrf_token }}',  
-                        action: 'post',
-                    },
-                    success: function (json) {
-                        alert('Item added to cart');
-                    },
-                    error: function (xhr, errmsg, err) {  
-                    console.log(xhr.status + ": " + xhr.responseText);
-                }
-            });
-        });
-
-    </script>
+<div class="product-details">
+    <img src="{{ item.images.url }}" alt="{{ item.name }}">
+    <h2>{{ item.name }}</h2>
+    <p>{{ item.description }}</p>
+    <p class="price">ksh. {{ item.price }}</p>
+    <form method="post" action="{% url 'add_to_cart' item.id %}">
+        {% csrf_token %}
+        <input type="hidden" name="item_id" value="{{ item.id }}">
+        <button type="submit" class="btn">Add to Cart</button>
+    </form>
+</div>
 {% endblock %}

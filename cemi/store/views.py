@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Store, items, user, cart
+from .models import Store, items, user
 from .cart import Cart
 from django.contrib import messages
 from django.http import JsonResponse
 from .forms import RegisterForm, LoginForm, LogoutForm
+from decimal import Decimal
+
 
 def register(request):
     form = RegisterForm()
@@ -94,7 +96,7 @@ def details(request, item_id):
     }
     
     return render(request, 'details.html', context)
-
+"""
 def cart(request):
     user_page = user.objects.all()
     store_page = Store.objects.all()
@@ -106,13 +108,46 @@ def cart(request):
         
     }
     return render(request, 'cart.html', context)
+"""
 
 
-def add_to_cart(request, item_id):
+"""def add_to_cart(request, item_id):
     cart = Cart(request)
     if request.POST.get('action') == 'post':
         item_id = int(request.POST.get('item_id'))
         item = get_object_or_404(items, id=item_id)
         cart.add(item=item)
-        response = JsonResponse({'qty': cart.__len__()})
+        response = JsonResponse({'qty': item.name, 'price': item.price})
         return response
+        """
+from django.shortcuts import render, redirect
+from .cart import Cart
+from decimal import Decimal
+
+def cart(request):
+    cart = Cart(request)
+    total_quantity = sum(item['quantity'] for item in cart.cart.values())
+    context = {
+        'cart': cart,
+        'total_quantity': total_quantity,
+    }
+    return render(request, 'cart.html', context)
+
+def reduce_item_quantity(request, item_id):
+    cart = Cart(request)
+    cart.reduce_quantity(item_id)
+    return redirect('cart')
+
+
+def checkout(request):
+    # Implement your checkout logic here
+    return render(request, 'checkout.html')
+
+
+def add_to_cart(request, item_id):
+    item = get_object_or_404(items, id=item_id)
+    cart = Cart(request)
+    cart.add(item)
+    # Calculate total price for the added item
+    total_price = Decimal(item.price) * cart.cart[str(item_id)]['quantity']
+    return redirect('cart')  # Redirect to the cart page after adding the item
