@@ -76,10 +76,16 @@ main {
     justify-content: space-evenly;
 }
 
-.product {
+.products {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
     margin-bottom: 20px;
-    text-align: center;
-    flex: 1; /* Take up equal space */
+    border: 1px solid #ccc;
+    display: inline-block;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
 .product img {

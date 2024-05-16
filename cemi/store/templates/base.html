@@ -21,12 +21,12 @@
         <h1>{% block heading %}{% endblock %}</h1>
 
             <ul>
-                <li><a href="{% url 'profile' %}">Profile</a></li>
-                <li><a href="/">Home</a></li>
-                <li><a href="{% url 'shop' %}">Shop</a></li>
-                <li><a href="{% url 'about' %}">About</a></li>
-                <li><a href="{% url 'contact' %}">Contact</a></li>
-                <li><a href="{% url 'cart' %}"><img src="{% static 'cart.png' %}" alt="Shopping Cart"></a></li>
+                <button><a href="{% url 'profile' %}">Profile</a></button>
+                <button><a href="/">Home</a></li></button>
+                <button><a href="{% url 'shop' %}">Shop</a></button>
+                <button><a href="{% url 'about' %}">About</a></button>
+                <button><a href="{% url 'contact' %}">Contact</a></button>
+                <a href="{% url 'cart' %}"><img src="{% static 'cart.png' %}" alt="Shopping Cart"></a>
                 {% if cart %}
                     <b><li class="red" style="color: red;"><a href="{% url 'cart' %}">Cart: {{ total_quantity }}</a></li></b>
                 {% endif %}

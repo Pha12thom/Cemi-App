@@ -9,7 +9,11 @@
 
 header img {
     width: 30px;
+    margin-left: auto; /* Center the image */
+    margin-right: auto; /* Center the image */
+    display: block; /* Ensure the image is centered */
 }
+
 body {
     font-family: Arial, sans-serif;
 }
@@ -29,10 +33,10 @@ header h1 {
 
 nav ul {
     list-style-type: none;
+    display: flex;
 }
 
 nav ul li {
-    display: inline;
     margin-right: 20px;
 }
 
@@ -50,6 +54,7 @@ main {
     padding: 50px 0;
     background-color: #f4f4f4;
     display: flex;
+    flex-direction: column; /* Stack items vertically on small screens */
 }
 
 .hero h2 {
@@ -59,7 +64,7 @@ main {
 .btn {
     display: inline-block;
     background-color: #333;
-    color: #fff;
+    color: #40a732;
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 5px;
@@ -67,13 +72,14 @@ main {
 
 .products {
     display: flex;
-    margin-top: 50px;
+    flex-wrap: wrap; /* Allow products to wrap to the next line */
     justify-content: space-evenly;
 }
 
 .product {
     margin-bottom: 20px;
     text-align: center;
+    flex: 1; /* Take up equal space */
 }
 
 .product img {
@@ -86,21 +92,28 @@ footer {
     text-align: center;
     padding: 20px;
 }
+
 section {
     display: flex;
-    justify-content: 30px;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap; /* Allow sections to wrap to the next line */
     margin-top: 50px;
 }
+
 .feature {
     margin-bottom: 20px;
     text-align: center;
+    flex: 1; /* Take up equal space */
 }
+
 form {
     display: block;
     margin-top: 50px;
     border: #333 5px solid;
     padding: 50px;
 }
+
 /* cart.css */
 
 .cart-container {
@@ -147,13 +160,13 @@ form {
 .checkout-button:hover {
     background-color: #45a049;
 }
+
 .split-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     border: 10px solid rgb(47, 89, 167);
-    padding: ;
 }
 
 .left-section, .right-section {
