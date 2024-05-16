@@ -131,7 +131,6 @@ def profile(request):
     return render(request, 'profile.html', {'form': form})
 
 def shop(request):
-   
     user_page = UserProfile.objects.all()
     store_page = Store.objects.all()
     items_page = items.objects.all()
