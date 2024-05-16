@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout</title>
-</head>
-<body>
+{% extends 'store/base.html' %}
+{% load static %}
+{% block title %}Checkout{% endblock %}
+{% block heading %}Checkout payment{% endblock %}
+{% block content %}
 
 <div id="paypal-button-container"></div>
 
@@ -31,6 +28,5 @@
         }
     }).render('#paypal-button-container');
 </script>
-
-</body>
-</html>
+    
+    {% endblock %}
