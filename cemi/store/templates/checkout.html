@@ -1,6 +1,36 @@
-{% extends 'base.html' %}
-{% block title %}Checkout{% endblock %}
-{% block content %}
-<h1>Checkout</h1>
-<!-- Add your checkout form or process here -->
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+</head>
+<body>
+
+<div id="paypal-button-container"></div>
+
+<script src="https://www.paypal.com/sdk/js?client-id=AaZeiymEeB2HZVUEaFgw7xIJl3690YRxZdL4GxgFvUn-fgL99DiB4jeEZ9Ve0gCYLSLiiuEstdwQhVui&currency=USD" data-sdk-integration-source="button-factory"></script>
+<script>
+    paypal.Buttons({
+        createOrder: function(data, actions) {
+            // Set up the transaction details
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: '10.00' // Total amount to be charged
+                    }
+                }]
+            });
+        },
+        onApprove: function(data, actions) {
+            // Capture the payment when the customer approves the transaction
+            return actions.order.capture().then(function(details) {
+                // Redirect to a success page or show a success message
+                window.location.href = "{% url 'success' %}";
+            });
+        }
+    }).render('#paypal-button-container');
+</script>
+
+</body>
+</html>

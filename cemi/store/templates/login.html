@@ -1,10 +1,10 @@
 {% extends 'main.html' %}
 {% block title %}User Login{% endblock %}
-
+{% block heading %}Welcome{% endblock %}
 {% block content %}
 <div class="container">
     <div class="form-container">
-        <h1>Welcome Back!</h1>
+        <h1>Login to cemi shop </h1>
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}

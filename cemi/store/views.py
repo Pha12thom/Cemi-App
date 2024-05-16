@@ -141,12 +141,12 @@ def add_to_cart(request, item_id):
 def profile(request):
     user_profile = Profile.objects.get(user=request.User)
     if request.method == 'POST':
-        form = UserProfileForm(request.POST, instance=user_profile)
+        form = Profile(request.POST, instance=user_profile)
         if form.is_valid():
             form.save()
             return redirect('profile')  # Redirect to the profile page after saving
     else:
-        form = UserProfileForm(instance=user_profile)
+        form = Profile(instance=user_profile)
     return render(request, 'profile.html', {'form': form})
 
 def shop(request):
@@ -170,4 +170,7 @@ def contact(request):
 
 def about(request):
     return render(request, 'about.html')
+
+def success(request):
+    return render(request, 'success.html')
 

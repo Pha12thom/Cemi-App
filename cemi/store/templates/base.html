@@ -19,7 +19,9 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
         <h1>{% block heading %}{% endblock %}</h1>
+
             <ul>
+                <li><a href="{% url 'profile' %}">Profile</a></li>
                 <li><a href="/">Home</a></li>
                 <li><a href="{% url 'shop' %}">Shop</a></li>
                 <li><a href="{% url 'about' %}">About</a></li>
@@ -31,6 +33,7 @@
                 {% for users in user_page %}
                 <li><a href='#'> ${{ users.balance }}</a></li>
                 <li><a href='#'> {{ users.user }} </a></li>
+                
                 {% endfor %}
         </ul>
     </nav>
