@@ -1,4 +1,4 @@
-from .models import Store, items, UserProfile, cart 
+from .models import Store, items, Profile, cart 
 from django import forms
 from django.contrib.auth.models import User 
 
@@ -21,5 +21,5 @@ class LogoutForm(forms.Form):
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
-        model = UserProfile
-        fields = ['name', 'email']
+        model = Profile
+        fields = ['user']

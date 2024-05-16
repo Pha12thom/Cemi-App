@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Store, items, UserProfile
+from .models import Store, items, Profile
 from .cart import Cart
 from django.contrib import messages
 from django.http import JsonResponse
@@ -48,7 +48,7 @@ def user_logout(request):
         
         
 def home(request):
-    user_page = UserProfile.objects.all()
+    user_page = Profile.objects.all()
     store_page = Store.objects.all()
     items_page = items.objects.all()
     context = {
@@ -63,7 +63,7 @@ def home(request):
 def base(request):
     cart = Cart(request)
     total_quantity = sum(item['quantity'] for item in cart.cart.values())
-    user_page = UserProfile.objects.all()
+    user_page = Profile.objects.all()
     store_page = Store.objects.all()
     items_page = items.objects.all()
     
@@ -79,7 +79,7 @@ def base(request):
 
 def details(request, item_id):
     item = get_object_or_404(items, pk=item_id)
-    user_page = UserProfile.objects.all()
+    user_page = Profile.objects.all()
     store_page = Store.objects.all()
     items_page = items.objects.all()
     context = {
@@ -91,15 +91,30 @@ def details(request, item_id):
     
     return render(request, 'details.html', context)
 
-
 def cart(request):
     cart = Cart(request)
     total_quantity = sum(item['quantity'] for item in cart.cart.values())
+    
+    # Fetch the item objects including images
+    items_with_prices = []
+    total_price = 0  # Initialize total price
+    
+    for item_id, item_info in cart.cart.items():
+        item = get_object_or_404(items, id=item_id)
+        item.quantity = item_info['quantity']  # Add quantity to the item object
+        total_item_price = item.price * item_info['quantity']
+        total_price += total_item_price  # Add item's total price to the total price
+        items_with_prices.append((item, total_item_price))  # Append tuple of item and total price
+    
     context = {
         'cart': cart,
         'total_quantity': total_quantity,
+        'items_with_prices': items_with_prices,  # Pass the items with total prices to the template
+        'total_price': total_price,  # Pass total price to the template
     }
     return render(request, 'cart.html', context)
+
+
 
 def reduce_item_quantity(request, item_id):
     cart = Cart(request)
@@ -120,7 +135,7 @@ def add_to_cart(request, item_id):
     return redirect('cart') 
 
 def profile(request):
-    user_profile = UserProfile.objects.get(user=request.User)
+    user_profile = Profile.objects.get(user=request.User)
     if request.method == 'POST':
         form = UserProfileForm(request.POST, instance=user_profile)
         if form.is_valid():
@@ -131,7 +146,7 @@ def profile(request):
     return render(request, 'profile.html', {'form': form})
 
 def shop(request):
-    user_page = UserProfile.objects.all()
+    user_page = Profile.objects.all()
     store_page = Store.objects.all()
     items_page = items.objects.all()
     context = {

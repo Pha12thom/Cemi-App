@@ -7,7 +7,6 @@
         <table class="cart-table">
             <thead>
                 <tr>
-                    <th>Image</th>
                     <th>Item</th>
                     <th>Price</th>
                     <th>Quantity</th>
@@ -16,15 +15,17 @@
                 </tr>
             </thead>
             <tbody>
-                {% for item_id, item_info in cart.cart.items %}
+                {% for item, total_item_price in items_with_prices %}
                 <tr>
-                    <td><img src="{{ item_info.image.url }}" alt="{{ item_info.name }}" class="item-image"></td>
-                    <td>{{ item_info.name }}</td>
-                    <td>{{ item_info.price }}</td>
-                    <td>{{ item_info.quantity }}</td>
-                    <td>{{ item_info.total }}</td>
                     <td>
-                        <form action="{% url 'reduce_item_quantity' item_id=item_id %}" method="post">
+                        <img src="{{ item.images.url }}" alt="{{ item.name }}" class="cart-item-image">
+                        {{ item.name }}
+                    </td>
+                    <td>{{ item.price }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ total_item_price }}</td>
+                    <td>
+                        <form action="{% url 'reduce_item_quantity' item_id=item.id %}" method="post">
                             {% csrf_token %}
                             <button type="submit" class="reduce-button">Reduce Quantity</button>
                         </form>
@@ -34,7 +35,7 @@
             </tbody>
         </table>
         <p class="cart-summary">Quantity of items: {{ total_quantity }}</p>
-        <p class="cart-summary">Total: ksh {{ cart.get_total }}</p>
+        <p class="cart-summary">Total: ksh {{ total_price }}</p>
         <a href="{% url 'checkout' %}" class="checkout-button">Proceed to Checkout</a>
     </div>
 {% else %}

@@ -14,7 +14,7 @@
     {% for item in items_page %}
     <div class="product">  
         <img src="{{ item.images.url }}" height="200px" width="200px"  alt="{{ item.name }}">
-        <p>{{ item.description }}</p>
+        
         <p class="price">ksh. {{ item.price }}</p>
         <a href="{% url 'details' item.id %}" class="btn">view item</a>
     </div>
