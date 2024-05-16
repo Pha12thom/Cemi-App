@@ -1,0 +1,24 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}cemi shop{% endblock %}
+{% block heading %} Cemi shop {% endblock %}
+
+{% block content %}
+{% for users in user_page %}
+<h2>Hello {{ users.name }} view all availables items in our store </h2>
+{% endfor %}
+
+<section class="products">
+   
+    {% for item in items_page %}
+    <div class="product">  
+        <img src="{{ item.images.url }}" height="200px" width="200px"  alt="{{ item.name }}">
+        <p>{{ item.description }}</p>
+        <p class="price">ksh. {{ item.price }}</p>
+        <a href="{% url 'details' item.id %}" class="btn">view item</a>
+    </div>
+    {% endfor %}
+    <!-- Featured products content here -->
+</section>
+{% endblock %}

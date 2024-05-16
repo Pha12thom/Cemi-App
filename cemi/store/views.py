@@ -11,52 +11,42 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
 
-def register(request):
+def user_register(request):
+    form = RegisterForm(request.POST)
     if request.method == 'POST':
-        form = RegisterForm(request.POST)
         if form.is_valid():
-            username = form.cleaned_data['username']
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
-            # Create the user
-            user = User.objects.create(username=username, email=email, password=password)
-            # Log in the user after successful registration
-            return redirect('login')  # Redirect to the home page
-    else:
-        form = RegisterForm()
+            username = form.data['username']
+            password = form.data['password']
+            email = form.data['email']
+            user = User.objects.create_user(username=username, password=password, email=email)
+            user.save()
+            login(request, user)
+            return redirect('home')
     return render(request, 'register.html', {'form': form})
+                  
 
-def login(request): 
+def user_login(request):
+    form = LoginForm(request.POST)
     if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            User = authenticate(request, username=username, password=password)
-            if User is not None:
-                return redirect('base')
-            else:
-                return render(request, 'login.html', {'form': form, 'error_message': 'Invalid username or password.'})
-    else:
-        form = LoginForm()
-        return render(request, 'login.html', {'form': form})
+        username = form.data['username']
+        password = form.data['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, 'Invalid username or password.')
+    return render(request, 'login.html', {'form': form})
 
-
-
-
-def logout(request):
-    form = LogoutForm()
+def user_logout(request):
+    form = LogoutForm(request.POST)
     if request.method == 'POST':
-        form = LogoutForm(request.POST)
-        if form.is_valid():
-            messages.success(request, 'Logout successful')
-            return redirect('login')
-    context = {
-        'form': form,
-    }
-    return render(request, 'logout.html', context)
+        logout(request)
+        return redirect('home')
+    return render(request, 'logout.html', {'form': form})
 
-
+        
+        
 def home(request):
     user_page = UserProfile.objects.all()
     store_page = Store.objects.all()
@@ -139,3 +129,22 @@ def profile(request):
     else:
         form = UserProfileForm(instance=user_profile)
     return render(request, 'profile.html', {'form': form})
+
+def shop(request):
+   
+    user_page = UserProfile.objects.all()
+    store_page = Store.objects.all()
+    items_page = items.objects.all()
+    context = {
+        'user_page': user_page,
+        'store_page': store_page,
+        'items_page': items_page,
+        
+    }
+    return render(request, 'shop.html', context)
+
+def contact(request):
+    return render(request, 'contact.html')
+
+def about(request):
+    return render(request, 'about.html')
