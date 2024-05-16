@@ -26,7 +26,6 @@ class Store(models.Model):
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
     def __str__(self):
         return self.name
 
@@ -40,7 +39,6 @@ class items(models.Model):
     discount = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     percentage_discount = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
     images = models.ImageField(null= True, upload_to='static/', default='fridge.jpg')
-
     def __str__(self):
         return self.name
 
