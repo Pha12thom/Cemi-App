@@ -61,11 +61,15 @@ def home(request):
 
 
 def base(request):
+    if 'q' in request.GET:
+        q = request.GET['q']
+        items_page = items.objects.filter(name__icontains=q)
+    else:
+        items_page = items.objects.all()    
     cart = Cart(request)
     total_quantity = sum(item['quantity'] for item in cart.cart.values())
     user_page = Profile.objects.all()
     store_page = Store.objects.all()
-    items_page = items.objects.all()
     
     context = {
         'user_page': user_page,
@@ -146,9 +150,13 @@ def profile(request):
     return render(request, 'profile.html', {'form': form})
 
 def shop(request):
+    if 'q' in request.GET:
+        q = request.GET['q']
+        items_page = items.objects.filter(name__icontains=q)
+    else:
+        items_page = items.objects.all()
     user_page = Profile.objects.all()
     store_page = Store.objects.all()
-    items_page = items.objects.all()
     context = {
         'user_page': user_page,
         'store_page': store_page,
@@ -162,3 +170,4 @@ def contact(request):
 
 def about(request):
     return render(request, 'about.html')
+
