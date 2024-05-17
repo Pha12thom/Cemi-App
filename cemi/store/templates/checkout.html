@@ -27,6 +27,17 @@
             });
         }
     }).render('#paypal-button-container');
+    function createMpesaOrder() {
+        // Call your M-Pesa API to create an order
+        // Replace this with your actual API call once you have access to the M-Pesa API
+        alert('M-Pesa payment method will be available soon.');
+    }
+
+    var mpesaButton = document.createElement('button');
+    mpesaButton.innerText = 'Pay with M-Pesa';
+    mpesaButton.addEventListener('click', createMpesaOrder);
+    document.getElementById('mpesa-button-container').appendChild(mpesaButton);
+    
 </script>
 <div><summary>
     <p>Pay with PayPal</p>
