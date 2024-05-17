@@ -23,7 +23,7 @@
         <img src="{{ item.images }}" height="200px" width="200px"  alt="{{ item.name }}">
         <p> {{ item.name }}</p>
         <p class="price">ksh. {{ item.price }}</p>
-        <a href="{% url 'details' item.id %}" class="btn">view item</a>
+        <a href="{% url 'details' item.id %}" class="btn bg-dark-subtle">view item</a>
     </div>
     {% endfor %}
     <!-- Featured products content here -->

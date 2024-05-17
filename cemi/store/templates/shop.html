@@ -9,8 +9,8 @@
 <h2>Hello {{ users.name }} view all availables items in our store </h2>
 {% endfor %}
 <form action="#" method="GET">
-    <input type="search" name="q" placeholder="Search for items">
-    <button type="submit bg-dark">Search</button>
+    <input type="search" name="q" placeholder="Search for items" width="100%" style="margin-left: 0%;">
+    <button type="submit bg-dark" class="btn bg-dark-subtle">Search</button>
 </form>
 <nav>
 
@@ -21,7 +21,7 @@
         <img src="{{ item.images.url }}" height="200px" width="200px"  alt="{{ item.name }}">
         <p> {{ item.name }}</p>
         <p class="price">ksh. {{ item.price }}</p>
-        <a href="{% url 'details' item.id %}" class="btn">view item</a>
+        <a href="{% url 'details' item.id %}" class="btn bg-dark-subtle">view item</a>
     </div>
     {% endfor %}
     <!-- Featured products content here -->

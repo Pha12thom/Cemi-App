@@ -21,16 +21,17 @@
         <h1>{% block heading %}{% endblock %}</h1>
 
             <ul>
-                <button><a href="{% url 'profile' %}">Profile</a></button>
-                <button><a href="/">Home</a></li></button>
-                <button><a href="{% url 'shop' %}">Shop</a></button>
-                <button><a href="{% url 'about' %}">About</a></button>
-                <button><a href="{% url 'contact' %}">Contact</a></button>
-                <a href="{% url 'cart' %}"><img src="{% static 'cart.png' %}" alt="Shopping Cart"></a>
+                <a href="{% url 'profile' %}"  class="btn bg-dark-subtle">Profile</a></button>
+                <button><a href="/"  class="btn bg-dark-subtle">Home</a></li></button>
+                <button><a href="{% url 'shop' %}"  class="btn bg-dark-subtle">Shop</a></button>
+                <button><a href="{% url 'about' %}"  class="btn bg-dark-subtle">About</a></button>
+                <button><a href="{% url 'contact' %}"  class="btn bg-dark-subtle">Contact</a></button>
+    
                 {% if cart %}
-                    <b><li class="red" style="color: red;"><a href="{% url 'cart' %}">Cart: {{ total_quantity }}</a></li></b>
+                    <b><li class="red" style="color: red;"><a href="{% url 'cart' %}"  class="btn bg-dark-subtle">Cart: {{ total_quantity }}</a></li></b>
                 {% endif %}
                 {% for users in user_page %}
+                <a href="{% url 'cart' %}"><img src="{% static 'cart.png' %}" alt="Shopping Cart" class="btn bg-dark-subtle"></a>
                 <li><a href='#'> ${{ users.balance }}</a></li>
                 <li><a href='#'> {{ users.user }} </a></li>
                 

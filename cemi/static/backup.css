@@ -52,7 +52,7 @@ main {
 .hero {
     text-align: center;
     padding: 50px 0;
-    background-color: #f4f4f4;
+    background-color: #352929;
     display: flex;
     flex-direction: column; /* Stack items vertically on small screens */
 }
@@ -84,6 +84,7 @@ main {
 
 .product img {
     max-width: 100%;
+    border-radius: 30px solid #333;
 }
 
 footer {
@@ -180,3 +181,9 @@ form {
 }
 
 /* Add more styling as needed */
+input[type="search"] {
+    border-radius: 5px;
+    border: 5px solid #6dc58f;
+    width: 100%;
+    background-color: #b8e2d4;
+}

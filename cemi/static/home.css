@@ -103,7 +103,7 @@ section {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    flex-wrap: wrap; /* Allow sections to wrap to the next line */
+    flex-wrap: wrap; 
     margin-top: 50px;
 }
 

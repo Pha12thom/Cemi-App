@@ -13,7 +13,7 @@
     <form method="post" action="{% url 'add_to_cart' item.id %}">
         {% csrf_token %}
         <input type="hidden" name="item_id" value="{{ item.id }}">
-        <button type="submit" class="btn">Add to Cart</button>
+        <button type="submit" class="btn bg-dark-subtle">Add to Cart</button>
     </form>
 </div>
 {% endblock %}
