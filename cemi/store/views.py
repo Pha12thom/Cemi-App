@@ -42,7 +42,7 @@ def user_logout(request):
     form = LogoutForm(request.POST)
     if request.method == 'POST':
         logout(request)
-        return redirect('home')
+        return redirect('user_login')
     return render(request, 'logout.html', {'form': form})
 
         

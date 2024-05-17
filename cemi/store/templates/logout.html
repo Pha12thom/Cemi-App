@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .logout-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .logout-container h1 {
+            margin-bottom: 20px;
+        }
+        .logout-container form {
+            display: inline-block;
+        }
+        .logout-button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .logout-button:hover {
+            background-color: #555;
+        }
+        .no-button {
+            background-color: #f44336;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .no-button:hover {
+            background-color: #d32f2f;
+        }
+        .logout-message {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="logout-container">
+        <h1>Logout</h1>
+        <p class="logout-message">Are you sure you want to log out?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="logout-button">Logout</button>
+            <a href="{% url 'home' %}" class="no-button">No</a>
+        </form>
+    </div>
+</body>
+</html>

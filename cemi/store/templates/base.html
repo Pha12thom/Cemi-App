@@ -21,19 +21,20 @@
         <h1>{% block heading %}{% endblock %}</h1>
 
             <ul>
-                <a href="{% url 'profile' %}"  class="btn bg-dark-subtle">Profile</a></button>
-                <button><a href="/"  class="btn bg-dark-subtle">Home</a></li></button>
-                <button><a href="{% url 'shop' %}"  class="btn bg-dark-subtle">Shop</a></button>
-                <button><a href="{% url 'about' %}"  class="btn bg-dark-subtle">About</a></button>
-                <button><a href="{% url 'contact' %}"  class="btn bg-dark-subtle">Contact</a></button>
+                <a href="{% url 'profile' %}"  class="btn bg-dark-subtle">Profile</a>
+                <a href="/"  class="btn bg-dark-subtle">Home</a></li>
+                <a href="{% url 'shop' %}"  class="btn bg-dark-subtle">Shop</a>
+                <a href="{% url 'about' %}"  class="btn bg-dark-subtle">About</a>
+                <a href="{% url 'contact' %}"  class="btn bg-dark-subtle">Contact</a>
+                <a href="{% url 'user_logout' %}"  class="btn bg-dark-subtle">Logout</a>
     
                 {% if cart %}
                     <b><li class="red" style="color: red;"><a href="{% url 'cart' %}"  class="btn bg-dark-subtle">Cart: {{ total_quantity }}</a></li></b>
                 {% endif %}
                 {% for users in user_page %}
                 <a href="{% url 'cart' %}"><img src="{% static 'cart.png' %}" alt="Shopping Cart" class="btn bg-dark-subtle"></a>
-                <li><a href='#'> ${{ users.balance }}</a></li>
-                <li><a href='#'> {{ users.user }} </a></li>
+                <a href='#'> ${{ users.balance }}</a>
+                <a href='#'> {{ users.user }} </a>
                 
                 {% endfor %}
         </ul>

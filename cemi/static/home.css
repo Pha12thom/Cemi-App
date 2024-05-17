@@ -50,9 +50,10 @@ main {
 }
 
 .hero {
+    border-radius: 10px;
     text-align: center;
     padding: 50px 0;
-    background-color: #f4f4f4;
+    background-color: #b0c7c9;
     display: flex;
     flex-direction: column; /* Stack items vertically on small screens */
 }
@@ -64,7 +65,7 @@ main {
 .btn {
     display: inline-block;
     background-color: #333;
-    color: #fff;
+    color: #40a732;
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 5px;
@@ -76,20 +77,15 @@ main {
     justify-content: space-evenly;
 }
 
-.products {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+.product {
     margin-bottom: 20px;
-    border: 1px solid #ccc;
-    display: inline-block;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    text-align: center;
+    flex: 1; /* Take up equal space */
 }
 
 .product img {
     max-width: 100%;
+    border-radius: 30px solid #333;
 }
 
 footer {
@@ -103,7 +99,7 @@ section {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    flex-wrap: wrap; 
+    flex-wrap: wrap; /* Allow sections to wrap to the next line */
     margin-top: 50px;
 }
 
@@ -186,3 +182,9 @@ form {
 }
 
 /* Add more styling as needed */
+input[type="search"] {
+    border-radius: 5px;
+    border: 5px solid #ddf0e4;
+    width: 100%;
+    background-color: #b8e2d4;
+}
