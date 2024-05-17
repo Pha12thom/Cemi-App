@@ -9,11 +9,12 @@
 
 body {
     font-family: Arial, sans-serif;
+    background-color: var(--background-color);
 }
 
 header {
-    background-color: #333;
-    color: #fff;
+    background-color:var(--primary-color);
+    color: var(--secondary-color);
     padding: 20px;
     display: flex;
     justify-content: space-between;
@@ -41,30 +42,33 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #fff;
+    color: var(--secondary-color);
     text-decoration: none;
 }
 
 main {
     padding: 20px;
+    background-color: var(--secondary-color);
 }
 
 .hero {
     border-radius: 10px;
     text-align: center;
     padding: 50px 0;
-    background-color: #b0c7c9;
+    background-color: var(--secondary-color);
     display: flex;
     flex-direction: column;
+    color: var(--primary-color);
 }
 
 .hero h2 {
     margin-bottom: 20px;
+    color: var(--primary-color);
 }
 
 .btn {
     display: inline-block;
-    background-color: #333;
+    background-color: var(--primary-color);
     color: #40a732;
     padding: 10px 20px;
     text-decoration: none;
@@ -81,9 +85,10 @@ main {
 
 .product {
     flex: 1 1 calc(33.333% - 40px); /* Adjust width to a third of the container */
-    background-color: #fff;
+    background-color: var(--secondary-color);
     border: 1px solid #ddd;
     border-radius: 5px;
+    color: var(--primary-color);
     padding: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
@@ -111,8 +116,8 @@ main {
 }
 
 footer {
-    background-color: #333;
-    color: #fff;
+    background-color: var(--primary-color);
+    color: blue;
     text-align: center;
     padding: 20px;
     margin-bottom: 0%;
@@ -130,18 +135,20 @@ section {
     margin-bottom: 20px;
     text-align: center;
     flex: 1;
+    color: var(--primary-color);
 }
 
 form {
     display: block;
     margin-top: 50px;
-    border: #333 5px solid;
+    border: var(--primary-color) 5px solid;
     padding: 50px;
 }
 
 /* cart.css */
 
 .cart-container {
+    color: wheat;
     margin: 20px;
 }
 
@@ -157,12 +164,12 @@ form {
 }
 
 .cart-table th {
-    background-color: #f2f2f2;
+    background-color: var(--secondary-color);
 }
 
 .reduce-button {
     background-color: #f44336;
-    color: white;
+    color: var(--secondary-color);
     padding: 5px 10px;
     border: none;
     cursor: pointer;
@@ -174,7 +181,7 @@ form {
 
 .checkout-button {
     background-color: #4caf50;
-    color: white;
+    color: var(--secondary-color);
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
@@ -208,7 +215,7 @@ input[type="search"] {
     border-radius: 5px;
     border: 5px solid #ddf0e4;
     width: 100%;
-    background-color: #fdfdfd;
+    background-color: var(--secondary-color);
 }
 
 /* Responsive adjustments */
@@ -222,4 +229,29 @@ input[type="search"] {
     .product {
         flex: 1 1 calc(100% - 40px); /* One item per row */
     }
+}
+#icon {
+    width: 30px;
+    cursor: pointer;
+}
+
+:root {
+    --primary-color: #ffffff;
+    --secondary-color: #000000;
+    --border-color: #ddd;
+    --background-color: #f2f2f2;
+    --text-color: #333;
+}
+
+.dark-theme {
+    --primary-color: #000000;
+    --secondary-color: #ffffff;
+    --border-color: #333;
+    --background-color: #ffffff;
+    --text-color: #f2f2f2;
+}
+p {
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 1rem;
 }

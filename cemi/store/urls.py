@@ -14,7 +14,6 @@ urlpatterns = [
     path('reduce_item_quantity/<int:item_id>', views.reduce_item_quantity, name='reduce_item_quantity'),
     path('checkout/', views.checkout, name='checkout'),
     path('shop/', views.shop, name='shop'),
-    path('contact/', views.contact, name='contact'),
     path('about/', views.about, name='about'),
     path('success/', views.success, name='success'),
     
