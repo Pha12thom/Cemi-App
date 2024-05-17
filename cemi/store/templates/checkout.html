@@ -14,7 +14,7 @@
             return actions.order.create({
                 purchase_units: [{
                     amount: {
-                        value: '10.00' // Total amount to be charged
+                        value: '{{ total_price }}' // Total amount to be charged
                     }
                 }]
             });
@@ -28,5 +28,13 @@
         }
     }).render('#paypal-button-container');
 </script>
+<div><summary>
+    <p>Pay with PayPal</p>
+    <p>PayPal is a secure way to pay for your online purchases. You can pay with your credit card if you don't have a PayPal account.</p>
+    <p> Below is your summary</p>
+    {% if cart %}
+        <h1 style="color: green;"><p class="cart-summary">Total to pay: ksh {{ total_price }}</p></h1>
+    {% endif %}
+</summary></div>
     
-    {% endblock %}
+{% endblock %}

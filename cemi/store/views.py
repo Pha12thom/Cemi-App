@@ -127,8 +127,26 @@ def reduce_item_quantity(request, item_id):
 
 
 def checkout(request):
+    cart = Cart(request)
+    total_quantity = sum(item['quantity'] for item in cart.cart.values())
     
-    return render(request, 'checkout.html')
+    # Fetch the item objects including images
+    items_with_prices = []
+    total_price = 0  # Initialize total price
+    
+    for item_id, item_info in cart.cart.items():
+        item = get_object_or_404(items, id=item_id)
+        item.quantity = item_info['quantity']  # Add quantity to the item object
+        total_item_price = item.price * item_info['quantity']
+        total_price += total_item_price  # Add item's total price to the total price
+        items_with_prices.append((item, total_item_price))  # Append tuple of item and total price
+    context = {
+        'cart': cart,
+        'total_quantity': total_quantity,
+        'items_with_prices': items_with_prices,  # Pass the items with total prices to the template
+        'total_price': total_price,  # Pass total price to the template
+    } 
+    return render(request, 'checkout.html', context)
 
 
 def add_to_cart(request, item_id):
@@ -149,6 +167,7 @@ def profile(request):
         form = Profile(instance=user_profile)
     return render(request, 'profile.html', {'form': form})
 
+
 def shop(request):
     if 'q' in request.GET:
         q = request.GET['q']
@@ -160,8 +179,7 @@ def shop(request):
     context = {
         'user_page': user_page,
         'store_page': store_page,
-        'items_page': items_page,
-        
+        'items_page': items_page,   
     }
     return render(request, 'shop.html', context)
 
