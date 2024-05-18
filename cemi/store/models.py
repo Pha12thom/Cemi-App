@@ -30,9 +30,9 @@ class Store(models.Model):
 
 class items(models.Model):
     STATUS_CHOICES = [
-        ('available', 'Available'),
-        ('on_sale', 'On Sale'),
-        ('sold', 'Sold'),
+        ('off 20%', 'off 20%'),
+        ('off 50%', 'off 50%'),
+        ('off 30%', 'off 30%'),
     ]
 
     name = models.CharField(max_length=100)

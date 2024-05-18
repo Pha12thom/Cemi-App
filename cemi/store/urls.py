@@ -17,6 +17,7 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('success/', views.success, name='success'),
     path('order/' , views.order, name='order'),
+    path('orders/', views.orders, name='orders'),
   
     
    

@@ -272,7 +272,10 @@ from .forms import ProfileForm
 @login_required
 def user_profile(request):
     if request.method == 'POST':
+        
         form = ProfileForm(request.POST)
+        
+    
         if form.is_valid():
             profile = form.save(commit=False)
             profile.user = request.user
@@ -286,3 +289,14 @@ def user_profile(request):
     
     return render(request, 'user_profile.html', {'form': form})
 
+def orders(request):
+    profile = get_object_or_404(Profile, user=request.user)
+    latest_order = Order.objects.filter(user=request.user).order_by('-created_at').first()
+    
+    context = {
+        'profile': profile,
+        'latest_order': latest_order,
+    }
+    
+    return render(request, 'orders.html', context)
+    
