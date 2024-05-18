@@ -3,6 +3,7 @@
 {% extends 'base.html' %}
 {% block title %}User Profile{% endblock %}
 {% block content %}
+{% include 'orders.html' %}
     <div class="container">
         <!-- Display success message -->
         {% if messages %}
@@ -21,7 +22,7 @@
                     {% if user.profile %}
                         <p><strong>Email:</strong> {{ user.profile.email }}</p>
                         <p><strong>Spent:</strong> ksh. {{ user.profile.spent }}</p>
-                        <p><strong>Balance:</strong> ksh. {{ user.profile.balance }}</p>
+                        
                         <p><strong>Joined:</strong> {{ user.profile.created_at|date:"F j, Y" }}</p>
                     {% else %}
                         <p>No profile found.</p>

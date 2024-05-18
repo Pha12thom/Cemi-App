@@ -18,7 +18,7 @@ urlpatterns = [
     path('success/', views.success, name='success'),
     path('welcome/', views.welcome, name='welcome'),
     path('order/' , views.order, name='order'),
-    path('create_profile/', views.create_profile, name='create_profile'),
+  
     
    
 ]

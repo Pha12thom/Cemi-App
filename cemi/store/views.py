@@ -268,18 +268,6 @@ def order(request):
 from .forms import ProfileForm
 
 
-def create_profile(request):
-    if request.method == 'POST':
-        form = ProfileForm(request.POST)
-        if form.is_valid():
-            profile = form.save(commit=False)
-            profile.user = request.user
-            profile.save()
-            return redirect('profile')
-    else:
-        form = ProfileForm()
-    return render(request, 'profile.html', {'form': form})
-
 
 def user_profile(request):
     if request.method == 'POST':

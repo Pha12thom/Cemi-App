@@ -1,6 +1,4 @@
-{% extends 'base.html' %}
-{% block title %}User Profile{% endblock %}
-{% block heading %}User Profile{% endblock %}
+
 {% block content %}
 <div class="container mt-4">
     <h1 class="text-center">Profile</h1>
@@ -14,7 +12,7 @@
                     <p><strong>Username:</strong> {{ profile.user.username }}</p>
                     <p><strong>Email:</strong> {{ profile.email }}</p>
                     <p><strong>Spent:</strong> ksh. {{ profile.spent }}</p>
-                    <p><strong>Balance:</strong> ksh. {{ profile.balance }}</p>
+                    
                     <p><strong>Joined:</strong> {{ profile.created_at|date:"Y-m-d" }}</p>
                 </div>
             </div>
