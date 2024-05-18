@@ -4,9 +4,6 @@
 {% block heading %}Welcome to Cemi Online Store{% endblock %}
 
 {% block content %}
-{% for users in user_page %}
-<h2>Hello {{ users.name }} Welcome to Cemi Online Store </h2>
-{% endfor %}
 <section class="hero">
     <p>Discover a wide range of products.
     Welcome to Cemi Online Store, your one-stop destination for all your home equipment needs. Whether you're looking for kitchen appliances, furniture, electronics, or any other essential items for your home, we have a wide range of high-quality products to choose from. Our store is designed to provide you with a seamless shopping experience, allowing you to browse through our extensive collection and find exactly what you're looking for. With our user-friendly interface and secure payment options, you can shop with confidence and convenience. We are committed to delivering exceptional customer service and ensuring your satisfaction with every purchase. So why wait? Start exploring our featured products and discover the perfect additions to your home today. Shop now and transform your living space into a haven of comfort and style.</p>
@@ -19,9 +16,10 @@
         <span class="item-tag">{{ item.sold }}</span>
         {% endif %}
         <img src="{{ item.images.url }}" height="200px" width="200px" alt="{{ item.name }}">
-        <p class="badge bg-dark">{{ item.description }}</p>
+        <p class="badge bg-dark">{{ item.short_description }}</p>
         <p>{{ item.name }}</p>
-        <p class="price">ksh. {{ item.price }}</p>
+        <s style="color: red;">Was: ksh {{ item.discount }} </s>
+        <p  class="price">Now ksh. {{ item.price }}</p>
         <a href="{% url 'details' item.id %}" class="btn bg-dark-subtle">View Item</a>
     </div>
     {% endfor %}

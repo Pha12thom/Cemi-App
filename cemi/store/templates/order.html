@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Checkout{% endblock %}
+{% block heading %}Checkout Payment{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h2>Enter your details to complete the purchase</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="id_email" class="form-label">Email:</label>
+                            {{ form.email }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_phone_number" class="form-label">Phone Number:</label>
+                            {{ form.phone_number }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_delivery_address" class="form-label">Delivery Address:</label>
+                            {{ form.delivery_address }}
+                        </div>
+                        <div class="text-center">
+                            <p class="h5">Total Price: <strong>ksh {{ total_price }}</strong></p>
+                            <button type="submit" class="btn btn-primary">Submit Order</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -26,10 +26,10 @@
                             <button><img src="{% static 'moon.png' %}" id="icon" alt="Cemi Store" width="30px" id="logo"></button>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'profile' %}" class="nav-link">Profile</a>
+                            <a href="{% url 'user_profile' %}" class="nav-link">Profile</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/" class="nav-link">Home</a>
+                            <a href="{% url 'home' %}" class="nav-link">Home</a>
                         </li>
                         <li class="nav-item">
                             <a href="{% url 'shop' %}" class="nav-link">Shop</a>

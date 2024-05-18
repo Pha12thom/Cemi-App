@@ -32,3 +32,10 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['user']
+        
+from .models import Profile
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['user','email', 'phone_number', 'address']

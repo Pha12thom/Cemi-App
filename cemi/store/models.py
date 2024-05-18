@@ -2,16 +2,15 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Profile(models.Model):
-    email = models.EmailField(null=True, blank=True)
-    
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    spent = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
-    balance = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    email = models.EmailField(null=True)
+    phone_number = models.CharField(max_length=20, null=True)
+    address = models.TextField(null=True)
+
+    # Add other fields as needed
 
     def __str__(self):
-        return {self.user} 
+        return self.user.username 
     
     
 # Create your models here.
@@ -31,9 +30,9 @@ class Store(models.Model):
 
 class items(models.Model):
     STATUS_CHOICES = [
-        ('available', 'Available'),
-        ('on_sale', 'On Sale'),
-        ('sold', 'Sold'),
+        ('off 20%', 'off 20%'),
+        ('off 50%', 'off 50%'),
+        ('off 30%', 'off 30%'),
     ]
 
     name = models.CharField(max_length=100)

@@ -1,0 +1,42 @@
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center">Profile</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3>User Details</h3>
+                </div>
+                <div class="card-body">
+                    <p><strong>Username:</strong> {{ profile.user.username }}</p>
+                    <p><strong>Email:</strong> {{ profile.email }}</p>
+                    <p><strong>Spent:</strong> ksh. {{ profile.spent }}</p>
+                    
+                    <p><strong>Joined:</strong> {{ profile.created_at|date:"Y-m-d" }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Latest Order</h3>
+                </div>
+                <div class="card-body">
+                    {% if latest_order %}
+                        <p><strong>Order ID:</strong> {{ latest_order.id }}</p>
+                        <p><strong>Order Date:</strong> {{ latest_order.created_at|date:"Y-m-d" }}</p>
+                        <p><strong>Email:</strong> {{ latest_order.email }}</p>
+                        <p><strong>Phone Number:</strong> {{ latest_order.phone_number }}</p>
+                        <p><strong>Delivery Address:</strong> {{ latest_order.delivery_address }}</p>
+                        <p><strong>Items:</strong> {{ latest_order.items }}</p>
+                        <p><strong>Total Price:</strong> ksh. {{ latest_order.total_price }}</p>
+                    {% else %}
+                        <p>You have not placed any orders yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

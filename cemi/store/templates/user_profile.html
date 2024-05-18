@@ -1,0 +1,48 @@
+<!-- user_profile.html -->
+
+{% extends 'base.html' %}
+{% block title %}User Profile{% endblock %}
+{% block content %}
+{% include 'orders.html' %}
+    <div class="container">
+        <!-- Display success message -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="row">
+            <div class="col-lg-6">
+                <h1>User Profile</h1>
+                <div class="profile-info">
+                    <!-- Display existing user profile information here -->
+                    {% if user.profile %}
+                        <p><strong>Email:</strong> {{ user.profile.email }}</p>
+                        <p><strong>Spent:</strong> ksh. {{ user.profile.spent }}</p>
+                        
+                        <p><strong>Joined:</strong> {{ user.profile.created_at|date:"F j, Y" }}</p>
+                    {% else %}
+                        <p>No profile found.</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h2>Create Profile</h2>
+                <!-- Display form errors -->
+                {% if form.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        Please correct the errors below.
+                    </div>
+                {% endif %}
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

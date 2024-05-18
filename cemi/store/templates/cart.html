@@ -1,45 +1,52 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Cart{% endblock %}
 {% block heading %}View items in your cart {% endblock %}
 {% block content %}
 {% if cart %}
-    <div class="cart-container">
-        <h1>Your Cart</h1>
-        <table class="cart-table">
-            <thead>
+    <div class="container cart-container">
+        <h1 class="text-center my-4">Your Cart</h1>
+        <table class="table table-hover">
+            <thead class="thead-dark">
                 <tr>
-                    <th>Item</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Total</th>
-                    <th>Action</th>
+                    <th scope="col">Item</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
                 {% for item, total_item_price in items_with_prices %}
                 <tr>
-                    <td>
-                        <img src="{{ item.images.url }}" alt="{{ item.name }}" class="cart-item-image">
-                        {{ item.name }}
+                    <td class="align-middle">
+                        <div class="d-flex align-items-center">
+                            <img src="{{ item.images.url }}" alt="{{ item.name }}" class="cart-item-image img-thumbnail mr-3">
+                            <span>{{ item.name }}</span>
+                        </div>
                     </td>
-                    <td>{{ item.price }}</td>
-                    <td>{{ item.quantity }}</td>
-                    <td>{{ total_item_price }}</td>
-                    <td>
-                        <form action="{% url 'reduce_item_quantity' item_id=item.id %}" method="post">
+                    <td class="align-middle">ksh. {{ item.price }}</td>
+                    <td class="align-middle">{{ item.quantity }}</td>
+                    <td class="align-middle">ksh. {{ total_item_price }}</td>
+                    <td class="align-middle">
+                        <form action="{% url 'reduce_item_quantity' item_id=item.id %}" method="post" class="d-inline">
                             {% csrf_token %}
-                            <button type="submit" class="reduce-button">Reduce Quantity</button>
+                            <button type="submit" class="btn btn-danger btn-sm">Reduce Quantity</button>
                         </form>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <p class="cart-summary">Quantity of items: {{ total_quantity }}</p>
-        <p class="cart-summary">Total: ksh {{ total_price }}</p>
-        <a href="{% url 'order' %}" class="checkout-button">Proceed to Checkout</a>
+        <div class="cart-summary text-right">
+            <p class="mb-1">Quantity of items: {{ total_quantity }}</p>
+            <p class="font-weight-bold">Total: ksh. {{ total_price }}</p>
+            <a href="{% url 'order' %}" class="btn btn-success mt-3">Proceed to Checkout</a>
+        </div>
     </div>
 {% else %}
-    <p>Your cart is empty.</p>
+    <div class="container text-center my-5">
+        <p>Your cart is empty.</p>
+    </div>
 {% endif %}
 {% endblock %}

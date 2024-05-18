@@ -9,6 +9,13 @@ from decimal import Decimal
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
+from django.core.mail import send_mail
+from django.conf import settings
+from .forms import OrderForm
+from .models import Order
+from .cart import Cart  # Import your Cart class
+from django.contrib.auth.decorators import login_required
 
 
 def activateEmail(request, user, to_email):
@@ -88,7 +95,7 @@ def base(request):
     }
     return render(request, 'base.html', context)
 
-
+@login_required
 def details(request, item_id):
     item = get_object_or_404(items, pk=item_id)
     user_page = Profile.objects.all()
@@ -103,6 +110,7 @@ def details(request, item_id):
     
     return render(request, 'details.html', context)
 
+@login_required
 def cart(request):
     cart = Cart(request)
     total_quantity = sum(item['quantity'] for item in cart.cart.values())
@@ -127,13 +135,13 @@ def cart(request):
     return render(request, 'cart.html', context)
 
 
-
+@login_required
 def reduce_item_quantity(request, item_id):
     cart = Cart(request)
     cart.reduce_quantity(item_id)
     return redirect('cart')
 
-
+@login_required
 def checkout(request):
     cart = Cart(request)
     total_quantity = sum(item['quantity'] for item in cart.cart.values())
@@ -156,7 +164,7 @@ def checkout(request):
     } 
     return render(request, 'checkout.html', context)
 
-
+@login_required
 def add_to_cart(request, item_id):
     item = get_object_or_404(items, id=item_id)
     cart = Cart(request)
@@ -164,19 +172,19 @@ def add_to_cart(request, item_id):
     total_price = Decimal(item.price) * cart.cart[str(item_id)]['quantity']
     return redirect('cart') 
 
+@login_required
+def user_profile(request):
+    profile = get_object_or_404(Profile, user=request.user)
+    latest_order = Order.objects.filter(user=request.user).order_by('-created_at').first()
+    
+    context = {
+        'profile': profile,
+        'latest_order': latest_order,
+    }
+    
+    return render(request, 'profile.html', context)
 
-def profile(request):
-    user_profile = Profile.objects.get(user=request.User)
-    if request.method == 'POST':
-        form = Profile(request.POST, instance=user_profile)
-        if form.is_valid():
-            form.save()
-            return redirect('profile')  # Redirect to the profile page after saving
-    else:
-        form = Profile(instance=user_profile)
-    return render(request, 'profile.html', {'form': form})
-
-
+@login_required
 def shop(request):
     if 'q' in request.GET:
         q = request.GET['q']
@@ -212,15 +220,7 @@ def welcome(request):
     return render(request, 'welcome.html', context)
 
 
-from django.shortcuts import render, redirect
-from django.core.mail import send_mail
-from django.conf import settings
-from .forms import OrderForm
-from .models import Order
-from .cart import Cart  # Import your Cart class
-from django.contrib.auth.decorators import login_required
-
-
+@login_required
 def order(request):
     cart = Cart(request)
     items_with_prices = []
@@ -261,8 +261,42 @@ def order(request):
     else:
         form = OrderForm()
 
-    return render(request, 'check.html', {
+    return render(request, 'order.html', {
         'form': form,
         'total_price': total_price,
     })
 
+from .forms import ProfileForm
+
+
+@login_required
+def user_profile(request):
+    if request.method == 'POST':
+        
+        form = ProfileForm(request.POST)
+        
+    
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            messages.success(request, 'Profile created successfully!')
+            return redirect('user_profile')
+        else:
+            messages.error(request, 'An error occurred while creating the profile.')
+    else:
+        form = ProfileForm()
+    
+    return render(request, 'user_profile.html', {'form': form})
+
+def orders(request):
+    profile = get_object_or_404(Profile, user=request.user)
+    latest_order = Order.objects.filter(user=request.user).order_by('-created_at').first()
+    
+    context = {
+        'profile': profile,
+        'latest_order': latest_order,
+    }
+    
+    return render(request, 'orders.html', context)
+    
