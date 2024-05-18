@@ -1,31 +1,29 @@
-
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Home - Your Store{% endblock %}
-{% block heading %}Welcome to Cemi online Store{% endblock %}
+{% block heading %}Welcome to Cemi Online Store{% endblock %}
 
 {% block content %}
 {% for users in user_page %}
-<h2>Hello {{ users.name }} Welcome to cemi Online Store </h2>
+<h2>Hello {{ users.name }} Welcome to Cemi Online Store </h2>
 {% endfor %}
 <section class="hero">
-   
-
     <p>Discover a wide range of products.
-    Welcome to cemi Online Store, your one-stop destination for all your home equipment needs. Whether you're looking for kitchen appliances, furniture, electronics, or any other essential items for your home, we have a wide range of high-quality products to choose from. Our store is designed to provide you with a seamless shopping experience, allowing you to browse through our extensive collection and find exactly what you're looking for. With our user-friendly interface and secure payment options, you can shop with confidence and convenience. We are committed to delivering exceptional customer service and ensuring your satisfaction with every purchase. So why wait? Start exploring our featured products and discover the perfect additions to your home today. Shop now and transform your living space into a haven of comfort and style.</p>
-    
+    Welcome to Cemi Online Store, your one-stop destination for all your home equipment needs. Whether you're looking for kitchen appliances, furniture, electronics, or any other essential items for your home, we have a wide range of high-quality products to choose from. Our store is designed to provide you with a seamless shopping experience, allowing you to browse through our extensive collection and find exactly what you're looking for. With our user-friendly interface and secure payment options, you can shop with confidence and convenience. We are committed to delivering exceptional customer service and ensuring your satisfaction with every purchase. So why wait? Start exploring our featured products and discover the perfect additions to your home today. Shop now and transform your living space into a haven of comfort and style.</p>
 </section>
 <div class="feature"><h2>Featured Products</h2></div>
 <section class="products">
-   
     {% for item in items_page %}
-    <div class="product">  
-        <img src="{{ item.images }}" height="200px" width="200px"  alt="{{ item.name }}">
-        <p> {{ item.name }}</p>
+    <div class="product">
+        {% if item.sold %}
+        <span class="item-tag">{{ item.sold }}</span>
+        {% endif %}
+        <img src="{{ item.images.url }}" height="200px" width="200px" alt="{{ item.name }}">
+        <p class="badge bg-dark">{{ item.description }}</p>
+        <p>{{ item.name }}</p>
         <p class="price">ksh. {{ item.price }}</p>
-        <a href="{% url 'details' item.id %}" class="btn bg-dark-subtle">view item</a>
+        <a href="{% url 'details' item.id %}" class="btn bg-dark-subtle">View Item</a>
     </div>
     {% endfor %}
-    <!-- Featured products content here -->
 </section>
 {% endblock %}

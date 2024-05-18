@@ -200,3 +200,13 @@ def about(request):
 def success(request):
     return render(request, 'success.html')
 
+def welcome(request):
+    user_page = Profile.objects.all()
+    store_page = Store.objects.all()
+    items_page = items.objects.all()
+    context = {
+        'user_page': user_page,
+        'store_page': store_page,
+        'items_page': items_page,
+    }
+    return render(request, 'welcome.html', context)
