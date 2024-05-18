@@ -1,8 +1,18 @@
-<!-- Inside your view template (e.g., user_profile.html) -->
+<!-- user_profile.html -->
+
 {% extends 'base.html' %}
 {% block title %}User Profile{% endblock %}
 {% block content %}
     <div class="container">
+        <!-- Display success message -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
         <div class="row">
             <div class="col-lg-6">
                 <h1>User Profile</h1>
@@ -20,6 +30,12 @@
             </div>
             <div class="col-lg-6">
                 <h2>Create Profile</h2>
+                <!-- Display form errors -->
+                {% if form.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        Please correct the errors below.
+                    </div>
+                {% endif %}
                 <form method="post">
                     {% csrf_token %}
                     {{ form.as_p }}

@@ -9,6 +9,13 @@ from decimal import Decimal
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
+from django.core.mail import send_mail
+from django.conf import settings
+from .forms import OrderForm
+from .models import Order
+from .cart import Cart  # Import your Cart class
+from django.contrib.auth.decorators import login_required
 
 
 def activateEmail(request, user, to_email):
@@ -212,14 +219,6 @@ def welcome(request):
     return render(request, 'welcome.html', context)
 
 
-from django.shortcuts import render, redirect
-from django.core.mail import send_mail
-from django.conf import settings
-from .forms import OrderForm
-from .models import Order
-from .cart import Cart  # Import your Cart class
-from django.contrib.auth.decorators import login_required
-
 
 def order(request):
     cart = Cart(request)
@@ -266,3 +265,34 @@ def order(request):
         'total_price': total_price,
     })
 
+from .forms import ProfileForm
+
+
+def create_profile(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            return redirect('profile')
+    else:
+        form = ProfileForm()
+    return render(request, 'profile.html', {'form': form})
+
+
+def user_profile(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            messages.success(request, 'Profile created successfully!')
+            return redirect('user_profile')
+        else:
+            messages.error(request, 'An error occurred while creating the profile.')
+    else:
+        form = ProfileForm()
+    
+    return render(request, 'user_profile.html', {'form': form})
