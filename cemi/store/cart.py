@@ -28,6 +28,10 @@ class Cart:
 
     def save(self):
         self.session.modified = True
+    
+    def clear(self):
+        self.cart = {}
+        self.session.modified = True
 
     @property
     def get_total(self):

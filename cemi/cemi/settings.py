@@ -8,6 +8,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
+
 """
 
 from pathlib import Path
@@ -132,23 +133,15 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #activate account by email
-"""
+
 # Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'your_email_host'
-EMAIL_PORT = your_email_port
-EMAIL_HOST_USER = 'your_email_username'
-EMAIL_HOST_PASSWORD = 'your_email_password'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'geofreymilugo@gmail.com'
+EMAIL_HOST_PASSWORD = 'lejsklreeidzuzmp'
 EMAIL_USE_TLS = True  # or False if you're using SSL
 
 # Email activation settings
 ACCOUNT_ACTIVATION_DAYS = 7  # Number of days for activation link to remain valid
-EMAIL_FROM = 'your_email@example.com'  # Sender's email address for activation emails
-EMAIL_SUBJECT_PREFIX = '[Your Project Name]'  # Prefix for email subjects
-
-# Add the email activation app to INSTALLED_APPS
-INSTALLED_APPS += ['django.contrib.sites', 'django.contrib.sitemaps', 'registration']
-
-# Add the email activation middleware to MIDDLEWARE
-MIDDLEWARE += ['registration.middleware.RegistrationMiddleware']
-"""
+EMAIL_FROM = 'geofreymilugo@gmail.com'  # Sender's email address for activation emails

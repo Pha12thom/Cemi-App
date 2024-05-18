@@ -165,16 +165,16 @@ def add_to_cart(request, item_id):
     return redirect('cart') 
 
 
-def profile(request):
-    user_profile = Profile.objects.get(user=request.User)
-    if request.method == 'POST':
-        form = Profile(request.POST, instance=user_profile)
-        if form.is_valid():
-            form.save()
-            return redirect('profile')  # Redirect to the profile page after saving
-    else:
-        form = Profile(instance=user_profile)
-    return render(request, 'profile.html', {'form': form})
+def user_profile(request):
+    profile = get_object_or_404(Profile, user=request.user)
+    latest_order = Order.objects.filter(user=request.user).order_by('-created_at').first()
+    
+    context = {
+        'profile': profile,
+        'latest_order': latest_order,
+    }
+    
+    return render(request, 'profile.html', context)
 
 
 def shop(request):
@@ -261,7 +261,7 @@ def order(request):
     else:
         form = OrderForm()
 
-    return render(request, 'check.html', {
+    return render(request, 'order.html', {
         'form': form,
         'total_price': total_price,
     })

@@ -19,7 +19,7 @@
         <span class="item-tag">{{ item.sold }}</span>
         {% endif %}
         <img src="{{ item.images.url }}" height="200px" width="200px" alt="{{ item.name }}">
-        <p class="badge bg-dark">{{ item.description }}</p>
+        <p class="badge bg-dark">{{ item.short_description }}</p>
         <p>{{ item.name }}</p>
         <p class="price">ksh. {{ item.price }}</p>
         <a href="{% url 'details' item.id %}" class="btn bg-dark-subtle">View Item</a>
