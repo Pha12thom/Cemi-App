@@ -18,6 +18,7 @@ urlpatterns = [
     path('success/', views.success, name='success'),
     path('order/' , views.order, name='order'),
     path('orders/', views.orders, name='orders'),
+    path('handling_404/', views.handling_404, name='handling_404'),
   
     
    

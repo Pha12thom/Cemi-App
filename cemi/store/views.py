@@ -289,6 +289,7 @@ def user_profile(request):
     
     return render(request, 'user_profile.html', {'form': form})
 
+@login_required
 def orders(request):
     profile = get_object_or_404(Profile, user=request.user)
     latest_order = Order.objects.filter(user=request.user).order_by('-created_at').first()
@@ -299,4 +300,6 @@ def orders(request):
     }
     
     return render(request, 'orders.html', context)
-    
+
+def handling_404(request, exception):
+    return render(request, '404.html', status=404)
