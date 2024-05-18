@@ -210,3 +210,59 @@ def welcome(request):
         'items_page': items_page,
     }
     return render(request, 'welcome.html', context)
+
+
+from django.shortcuts import render, redirect
+from django.core.mail import send_mail
+from django.conf import settings
+from .forms import OrderForm
+from .models import Order
+from .cart import Cart  # Import your Cart class
+from django.contrib.auth.decorators import login_required
+
+
+def order(request):
+    cart = Cart(request)
+    items_with_prices = []
+    total_price = 0
+    
+    for item_id, item_info in cart.cart.items():
+        item = get_object_or_404(items, id=item_id)
+        total_item_price = item.price * item_info['quantity']
+        total_price += total_item_price
+        items_with_prices.append((item, total_item_price))
+
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            order = Order(
+                user=request.user,
+                email=form.cleaned_data['email'],
+                phone_number=form.cleaned_data['phone_number'],
+                delivery_address=form.cleaned_data['delivery_address'],
+                items=str(items_with_prices),
+                total_price=total_price
+            )
+            order.save()
+
+            # Send confirmation email
+            send_mail(
+                'Order Confirmation',
+                f'Thank you for your order! Here are the details:\n\nItems: {items_with_prices}\nTotal Price: {total_price}\nDelivery Address: {order.delivery_address}',
+                settings.DEFAULT_FROM_EMAIL,
+                [order.email],
+                fail_silently=False,
+            )
+
+            # Clear the cart
+            cart.clear()
+
+            return redirect('success')
+    else:
+        form = OrderForm()
+
+    return render(request, 'check.html', {
+        'form': form,
+        'total_price': total_price,
+    })
+

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Checkout{% endblock %}
+{% block heading %}Checkout Payment{% endblock %}
+{% block content %}
+    <h2>Enter your details to complete the purchase</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p>Total Price: ksh {{ total_price }}</p>
+        <button type="submit" class="btn btn-primary">Submit Order</button>
+    </form>
+{% endblock %}
