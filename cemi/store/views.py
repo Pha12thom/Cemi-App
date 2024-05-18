@@ -11,6 +11,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
 
+def activateEmail(request, user, to_email):
+    messages.success(request, f'You have successfully registered. \n Please check your email {to_email} to activate your account.')
+
 def user_register(request):
     form = RegisterForm(request.POST)
     if request.method == 'POST':
@@ -19,8 +22,12 @@ def user_register(request):
             password = form.data['password']
             email = form.data['email']
             user = User.objects.create_user(username=username, password=password, email=email)
+            user.is_active = True
             user.save()
+            activateEmail(request, user, form.cleaned_data.get('email'))
+      
             login(request, user)
+            messages.success(request, 'You have successfully registered.')
             return redirect('home')
     return render(request, 'register.html', {'form': form})
                   
@@ -33,6 +40,7 @@ def user_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            messages.success(request, 'You have successfully logged in.')
             return redirect('home')
         else:
             messages.error(request, 'Invalid username or password.')
@@ -156,6 +164,7 @@ def add_to_cart(request, item_id):
     total_price = Decimal(item.price) * cart.cart[str(item_id)]['quantity']
     return redirect('cart') 
 
+
 def profile(request):
     user_profile = Profile.objects.get(user=request.User)
     if request.method == 'POST':
@@ -183,8 +192,7 @@ def shop(request):
     }
     return render(request, 'shop.html', context)
 
-def contact(request):
-    return render(request, 'contact.html')
+
 
 def about(request):
     return render(request, 'about.html')
@@ -192,3 +200,13 @@ def about(request):
 def success(request):
     return render(request, 'success.html')
 
+def welcome(request):
+    user_page = Profile.objects.all()
+    store_page = Store.objects.all()
+    items_page = items.objects.all()
+    context = {
+        'user_page': user_page,
+        'store_page': store_page,
+        'items_page': items_page,
+    }
+    return render(request, 'welcome.html', context)

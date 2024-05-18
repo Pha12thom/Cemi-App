@@ -10,46 +10,62 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <script src="//cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-
-
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 <body>
     <header>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
         <h1>{% block heading %}{% endblock %}</h1>
-
-            <ul>
-                <a href="{% url 'profile' %}"  class="btn bg-dark-subtle">Profile</a>
-                <a href="/"  class="btn bg-dark-subtle">Home</a></li>
-                <a href="{% url 'shop' %}"  class="btn bg-dark-subtle">Shop</a>
-                <a href="{% url 'about' %}"  class="btn bg-dark-subtle">About</a>
-                <a href="{% url 'contact' %}"  class="btn bg-dark-subtle">Contact</a>
-                <a href="{% url 'user_logout' %}"  class="btn bg-dark-subtle">Logout</a>
-    
-                {% if cart %}
-                    <b><li class="red" style="color: red;"><a href="{% url 'cart' %}"  class="btn bg-dark-subtle">Cart: {{ total_quantity }}</a></li></b>
-                {% endif %}
-                {% for users in user_page %}
-                <a href="{% url 'cart' %}"><img src="{% static 'cart.png' %}" alt="Shopping Cart" class="btn bg-dark-subtle"></a>
-                <a href='#'> ${{ users.balance }}</a>
-                <a href='#'> {{ users.user }} </a>
-                
-                {% endfor %}
-        </ul>
-    </nav>
-
-  </div>
-</nav>
-</nav>
     </header>
-    <main>
-        {% block content %}{% endblock %}
-    </main>
-    
-    <footer>
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <div class="position-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <button><img src="{% static 'moon.png' %}" id="icon" alt="Cemi Store" width="30px" id="logo"></button>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'profile' %}" class="nav-link">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'shop' %}" class="nav-link">Shop</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'about' %}" class="nav-link">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'user_logout' %}" class="nav-link">Logout</a>
+                        </li>
+                        {% if cart %}
+                        <li class="nav-item">
+                            <b><a href="{% url 'cart' %}" class="nav-link" style="color: red;">Cart: {{ total_quantity }}</a></b>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                {% block content %}{% endblock %}
+            </main>
+        </div>
+    </div>
+    <footer class="text-center">
         <p>&copy; {% now "Y" %} Cemi Store. All rights reserved.</p>
     </footer>
+    <script>
+        var icon = document.getElementById('icon');
+        icon.onclick = function() {
+            document.body.classList.toggle('dark-theme');
+            if (document.body.classList.contains('dark-theme')) {
+                icon.src = "{% static 'sun.png' %}";
+            } else {
+                icon.src = "{% static 'moon.png' %}";
+            }
+        }
+    </script>
 </body>
 </html>

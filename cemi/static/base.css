@@ -1,9 +1,3 @@
-/* styles.css */
-
-/* Other styles... */
-
-
-/* Path: base css */
 /* Resetting default margin and padding */
 * {
     margin: 0;
@@ -73,7 +67,7 @@ footer {
 }
 
 .dark-theme #sidebar .nav-link {
-    color: #000000;
+    color: #fff;
 }
 
 .dark-theme #sidebar .nav-link:hover {
@@ -89,51 +83,4 @@ footer {
     .sidebar .nav-item {
         text-align: center;
     }
-}
-
-
-/*homepage css*/
-.products {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-}
-
-.product {
-    position: relative;
-    margin-bottom: 20px;
-    text-align: center;
-    flex: 1 1 200px; /* Adjust as needed */
-}
-
-.product img {
-    max-width: 100%;
-    border-radius: 5px;
-}
-
-.item-tag {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background-color: rgba(255, 0, 0, 0.8); /* Adjust color as needed */
-    color: white;
-    padding: 5px 10px;
-    font-size: 0.9em;
-    font-weight: bold;
-    border-radius: 3px;
-}
-
-.price {
-    font-size: 1.2em;
-    font-weight: bold;
-    margin: 10px 0;
-}
-
-.btn {
-    display: inline-block;
-    background-color: #333;
-    color: #40a732;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
 }
