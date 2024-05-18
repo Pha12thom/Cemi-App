@@ -37,7 +37,7 @@
         </table>
         <p class="cart-summary">Quantity of items: {{ total_quantity }}</p>
         <p class="cart-summary">Total: ksh {{ total_price }}</p>
-        <a href="{% url 'checkout' %}" class="checkout-button">Proceed to Checkout</a>
+        <a href="{% url 'order' %}" class="checkout-button">Proceed to Checkout</a>
     </div>
 {% else %}
     <p>Your cart is empty.</p>
