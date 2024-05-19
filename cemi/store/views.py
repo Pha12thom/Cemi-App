@@ -32,12 +32,12 @@ def user_register(request):
             user.is_active = True
             user.save()
             activateEmail(request, user, form.cleaned_data.get('email'))
-      
+
             login(request, user)
             messages.success(request, 'You have successfully registered.')
             return redirect('home')
     return render(request, 'register.html', {'form': form})
-                  
+
 
 def user_login(request):
     form = LoginForm(request.POST)
@@ -60,12 +60,16 @@ def user_logout(request):
         return redirect('user_login')
     return render(request, 'logout.html', {'form': form})
 
-        
-        
+
+
 def home(request):
+    if 'q' in request.GET:
+        q = request.GET['q']
+        items_page = items.objects.filter(name__icontains=q)
+    else:
+        items_page = items.objects.all()
     user_page = Profile.objects.all()
     store_page = Store.objects.all()
-    items_page = items.objects.all()
     context = {
         'user_page': user_page,
         'store_page': store_page,
@@ -75,17 +79,18 @@ def home(request):
 
 
 
+
 def base(request):
     if 'q' in request.GET:
         q = request.GET['q']
         items_page = items.objects.filter(name__icontains=q)
     else:
-        items_page = items.objects.all()    
+        items_page = items.objects.all()
     cart = Cart(request)
     total_quantity = sum(item['quantity'] for item in cart.cart.values())
     user_page = Profile.objects.all()
     store_page = Store.objects.all()
-    
+
     context = {
         'user_page': user_page,
         'store_page': store_page,
@@ -107,25 +112,25 @@ def details(request, item_id):
         'items_page': items_page,
         'item': item,
     }
-    
+
     return render(request, 'details.html', context)
 
 @login_required
 def cart(request):
     cart = Cart(request)
     total_quantity = sum(item['quantity'] for item in cart.cart.values())
-    
+
     # Fetch the item objects including images
     items_with_prices = []
     total_price = 0  # Initialize total price
-    
+
     for item_id, item_info in cart.cart.items():
         item = get_object_or_404(items, id=item_id)
         item.quantity = item_info['quantity']  # Add quantity to the item object
         total_item_price = item.price * item_info['quantity']
         total_price += total_item_price  # Add item's total price to the total price
         items_with_prices.append((item, total_item_price))  # Append tuple of item and total price
-    
+
     context = {
         'cart': cart,
         'total_quantity': total_quantity,
@@ -145,11 +150,11 @@ def reduce_item_quantity(request, item_id):
 def checkout(request):
     cart = Cart(request)
     total_quantity = sum(item['quantity'] for item in cart.cart.values())
-    
+
     # Fetch the item objects including images
     items_with_prices = []
     total_price = 0  # Initialize total price
-    
+
     for item_id, item_info in cart.cart.items():
         item = get_object_or_404(items, id=item_id)
         item.quantity = item_info['quantity']  # Add quantity to the item object
@@ -161,7 +166,7 @@ def checkout(request):
         'total_quantity': total_quantity,
         'items_with_prices': items_with_prices,  # Pass the items with total prices to the template
         'total_price': total_price,  # Pass total price to the template
-    } 
+    }
     return render(request, 'checkout.html', context)
 
 @login_required
@@ -170,18 +175,18 @@ def add_to_cart(request, item_id):
     cart = Cart(request)
     cart.add(item)
     total_price = Decimal(item.price) * cart.cart[str(item_id)]['quantity']
-    return redirect('cart') 
+    return redirect('cart')
 
 @login_required
 def user_profile(request):
     profile = get_object_or_404(Profile, user=request.user)
     latest_order = Order.objects.filter(user=request.user).order_by('-created_at').first()
-    
+
     context = {
         'profile': profile,
         'latest_order': latest_order,
     }
-    
+
     return render(request, 'profile.html', context)
 
 @login_required
@@ -196,7 +201,7 @@ def shop(request):
     context = {
         'user_page': user_page,
         'store_page': store_page,
-        'items_page': items_page,   
+        'items_page': items_page,
     }
     return render(request, 'shop.html', context)
 
@@ -225,7 +230,7 @@ def order(request):
     cart = Cart(request)
     items_with_prices = []
     total_price = 0
-    
+
     for item_id, item_info in cart.cart.items():
         item = get_object_or_404(items, id=item_id)
         total_item_price = item.price * item_info['quantity']
@@ -257,7 +262,7 @@ def order(request):
             # Clear the cart
             cart.clear()
 
-            return redirect('success')
+            return redirect('checkout')
     else:
         form = OrderForm()
 
@@ -272,10 +277,10 @@ from .forms import ProfileForm
 @login_required
 def user_profile(request):
     if request.method == 'POST':
-        
+
         form = ProfileForm(request.POST)
-        
-    
+
+
         if form.is_valid():
             profile = form.save(commit=False)
             profile.user = request.user
@@ -286,19 +291,19 @@ def user_profile(request):
             messages.error(request, 'An error occurred while creating the profile.')
     else:
         form = ProfileForm()
-    
+
     return render(request, 'user_profile.html', {'form': form})
 
 @login_required
 def orders(request):
     profile = get_object_or_404(Profile, user=request.user)
     latest_order = Order.objects.filter(user=request.user).order_by('-created_at').first()
-    
+
     context = {
         'profile': profile,
         'latest_order': latest_order,
     }
-    
+
     return render(request, 'orders.html', context)
 
 def handling_404(request, exception):

@@ -3,9 +3,13 @@
 {% block title %}Checkout{% endblock %}
 {% block heading %}Checkout payment{% endblock %}
 {% block content %}
-
+<h1>Thank you, your order has been received. please check your email to confirm order and select payment method below to complete this order</h1>
+<p>Pay with PayPal, Bank account or Mpesa</p>
+<p> Below is your summary for your payment</p>
+    {% if cart %}
+        <h1 style="color: green;"><p class="cart-summary">Total to pay: ksh {{ total_price }}</p></h1>
+    {% endif %}
 <div id="paypal-button-container"></div>
-
 <script src="https://www.paypal.com/sdk/js?client-id=AaZeiymEeB2HZVUEaFgw7xIJl3690YRxZdL4GxgFvUn-fgL99DiB4jeEZ9Ve0gCYLSLiiuEstdwQhVui&currency=USD" data-sdk-integration-source="button-factory"></script>
 <script>
     paypal.Buttons({
@@ -37,15 +41,25 @@
     mpesaButton.innerText = 'Pay with M-Pesa';
     mpesaButton.addEventListener('click', createMpesaOrder);
     document.getElementById('mpesa-button-container').appendChild(mpesaButton);
-    
+
 </script>
-<div><summary>
-    <p>Pay with PayPal</p>
-    <p>PayPal is a secure way to pay for your online purchases. You can pay with your credit card if you don't have a PayPal account.</p>
-    <p> Below is your summary</p>
+<h2>Mpesa method</h2>
+<ol style="color: green;" >
+    <li>go to Mpesa</li>
+    <li> send money</li>
+    <li>enter 0112155880 as the receiving account</li>
     {% if cart %}
-        <h1 style="color: green;"><p class="cart-summary">Total to pay: ksh {{ total_price }}</p></h1>
+        <li style="color: green;" class="cart-summary">Enter your total amount to pay: ksh {{ total_price }}</li>
     {% endif %}
-</summary></div>
-    
+    <li>Enter mpesa PIN</li>
+    <li>please confirm detils that the "milugo geofrey" is the receiving account</li>
+    <li>Confirm send</li>
+    <li><b>Please forward the mpesa transaction message to both <a href="geofreymilugo@gmail.com">geofreymilugo@gmail.com</a> and <a href="https://wa.me/254738550728">whatsapp</a> with both fullname and time of payment</b></li>
+</ol>
+<br><br>
+    <p>Incase of errors during your payment please reach us through <a href="geofreymilugo@gmail.com">gmail</a> or <a href="https://wa.me/254738550728">whatsapp</a> </p>
+<h1> THANK YOU FOR BEING A VALUED MEMBER OF CEMI</h1>
+
+
+
 {% endblock %}

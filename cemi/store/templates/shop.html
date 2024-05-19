@@ -5,9 +5,7 @@
 {% block heading %} Cemi shop {% endblock %}
 
 {% block content %}
-{% for users in user_page %}
-<h2>Hello {{ users.name }} view all availables items in our store </h2>
-{% endfor %}
+<h2>View and search items in our store</h2>
 <form action="#" method="GET">
     <input type="search" name="q" placeholder="Search for items" width="100%" style="margin-left: 0%;">
     <button type="submit bg-dark" class="btn bg-dark-subtle">Search</button>
