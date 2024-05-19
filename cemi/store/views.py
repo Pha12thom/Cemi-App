@@ -70,10 +70,16 @@ def home(request):
         items_page = items.objects.all()
     user_page = Profile.objects.all()
     store_page = Store.objects.all()
+    cart = Cart(request)
+    total_quantity = sum(item['quantity'] for item in cart.cart.values())
+
     context = {
         'user_page': user_page,
         'store_page': store_page,
         'items_page': items_page,
+        'total_quantity': total_quantity,
+        'cart': cart,
+
     }
     return render(request, 'home.html', context)
 
@@ -106,11 +112,15 @@ def details(request, item_id):
     user_page = Profile.objects.all()
     store_page = Store.objects.all()
     items_page = items.objects.all()
+    cart = Cart(request)
+    total_quantity = sum(item['quantity'] for item in cart.cart.values())
     context = {
         'user_page': user_page,
         'store_page': store_page,
         'items_page': items_page,
         'item': item,
+        'total_quantity': total_quantity,
+        'cart': cart,
     }
 
     return render(request, 'details.html', context)
@@ -181,10 +191,15 @@ def add_to_cart(request, item_id):
 def user_profile(request):
     profile = get_object_or_404(Profile, user=request.user)
     latest_order = Order.objects.filter(user=request.user).order_by('-created_at').first()
-
+    cart = Cart(request)
+    total_quantity = sum(item['quantity'] for item in cart.cart.values())
     context = {
         'profile': profile,
         'latest_order': latest_order,
+        'total_quantity': total_quantity,
+        'cart': cart,
+
+
     }
 
     return render(request, 'profile.html', context)
@@ -196,19 +211,29 @@ def shop(request):
         items_page = items.objects.filter(name__icontains=q)
     else:
         items_page = items.objects.all()
+    cart = Cart(request)
     user_page = Profile.objects.all()
     store_page = Store.objects.all()
+    total_quantity = sum(item['quantity'] for item in cart.cart.values())
     context = {
         'user_page': user_page,
         'store_page': store_page,
         'items_page': items_page,
+        'cart': cart,
+        'total_quantity': total_quantity,
+
+
     }
     return render(request, 'shop.html', context)
 
 
 
 def about(request):
-    return render(request, 'about.html')
+    cart = Cart(request)
+    context = {
+        'cart': cart,
+        }
+    return render(request, 'about.html', context)
 
 def success(request):
     return render(request, 'success.html')
@@ -298,10 +323,16 @@ def user_profile(request):
 def orders(request):
     profile = get_object_or_404(Profile, user=request.user)
     latest_order = Order.objects.filter(user=request.user).order_by('-created_at').first()
+    cart = Cart(request)
+    total_quantity = sum(item['quantity'] for item in cart.cart.values())
+
 
     context = {
         'profile': profile,
         'latest_order': latest_order,
+        'cart': cart,
+        'total_quantity': total_quantity,
+
     }
 
     return render(request, 'orders.html', context)

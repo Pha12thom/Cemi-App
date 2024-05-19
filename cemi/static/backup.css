@@ -247,3 +247,22 @@ footer {
         margin-top: 20px;
     }
 }
+
+
+textarea#id_delivery_address {
+    width: 100%;
+}
+
+/* styles.css */
+.form-control {
+    width: 100%;
+    padding: 8px;
+    margin: 4px 0;
+    box-sizing: border-box;
+}
+
+.form-control-sm {
+    font-size: 0.875rem;
+    padding: 4px 8px;
+}
+

@@ -45,7 +45,7 @@
                         </li>
                         {% if cart %}
                         <li class="nav-item">
-                            <b><a href="{% url 'cart' %}" class="nav-link" style="color: red;">Cart: {{ total_quantity }}</a></b>
+                            <b><a href="{% url 'cart' %}" class="nav-link" style="color: red;"><img src="{% static 'cart.png' %}" width="30px">{{ total_quantity }}</a></b>
                         </li>
                         {% endif %}
                     </ul>
