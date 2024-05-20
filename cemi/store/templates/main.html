@@ -14,13 +14,20 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 <body>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
     <header>
         <h1>Welcome to cemi shop</h1>
     </header>
     <main>
         {% block content %}{% endblock %}
     </main>
-    
+
     <footer>
         <p>&copy; {% now "Y" %} Cemi Store. All rights reserved.</p>
     </footer>

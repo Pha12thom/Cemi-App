@@ -265,4 +265,15 @@ textarea#id_delivery_address {
     font-size: 0.875rem;
     padding: 4px 8px;
 }
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #0f5598;
+}
 
+h1, h2 {
+    color: #3691ed;
+}

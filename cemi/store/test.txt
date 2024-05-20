@@ -18,14 +18,6 @@ from .cart import Cart  # Import your Cart class
 from django.contrib.auth.decorators import login_required
 
 
-def custom_login_required(view_func):
-    def wrapped_view(request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            messages.error(request, 'Please login to your account or register to view this part of the site.')
-            return redirect('user_login')  # Ensure this URL name matches your login view URL name
-        return view_func(request, *args, **kwargs)
-    return wrapped_view
-
 def activateEmail(request, user, to_email):
     messages.success(request, f'You have successfully registered. \n Please check your email {to_email} to activate your account.')
 
@@ -61,7 +53,7 @@ def user_login(request):
             messages.error(request, 'Invalid username or password.')
     return render(request, 'login.html', {'form': form})
 
-@custom_login_required
+@login_required
 def user_logout(request):
     form = LogoutForm(request.POST)
     if request.method == 'POST':
@@ -71,7 +63,7 @@ def user_logout(request):
     return render(request, 'logout.html', {'form': form})
 
 
-@custom_login_required
+
 def home(request):
     if 'q' in request.GET:
         q = request.GET['q']
@@ -116,7 +108,7 @@ def base(request):
     }
     return render(request, 'base.html', context)
 
-@custom_login_required
+@login_required
 def details(request, item_id):
     item = get_object_or_404(items, pk=item_id)
     user_page = Profile.objects.all()
@@ -135,7 +127,7 @@ def details(request, item_id):
 
     return render(request, 'details.html', context)
 
-@custom_login_required
+@login_required
 def cart(request):
     cart = Cart(request)
     total_quantity = sum(item['quantity'] for item in cart.cart.values())
@@ -160,13 +152,13 @@ def cart(request):
     return render(request, 'cart.html', context)
 
 
-@custom_login_required
+@login_required
 def reduce_item_quantity(request, item_id):
     cart = Cart(request)
     cart.reduce_quantity(item_id)
     return redirect('cart')
 
-@custom_login_required
+@login_required
 def checkout(request):
     cart = Cart(request)
     total_quantity = sum(item['quantity'] for item in cart.cart.values())
@@ -189,7 +181,7 @@ def checkout(request):
     }
     return render(request, 'checkout.html', context)
 
-@custom_login_required
+@login_required
 def add_to_cart(request, item_id):
     item = get_object_or_404(items, id=item_id)
     cart = Cart(request)
@@ -197,7 +189,7 @@ def add_to_cart(request, item_id):
     total_price = Decimal(item.price) * cart.cart[str(item_id)]['quantity']
     return redirect('cart')
 
-@custom_login_required
+@login_required
 def user_profile(request):
     profile = get_object_or_404(Profile, user=request.user)
     latest_order = Order.objects.filter(user=request.user).order_by('-created_at').first()
@@ -237,7 +229,7 @@ def shop(request):
     return render(request, 'shop.html', context)
 
 
-@custom_login_required
+
 def about(request):
     cart = Cart(request)
     context = {
@@ -260,7 +252,7 @@ def welcome(request):
     return render(request, 'welcome.html', context)
 
 
-@custom_login_required
+@login_required
 def order(request):
     cart = Cart(request)
     items_with_prices = []
@@ -309,7 +301,7 @@ def order(request):
 from .forms import ProfileForm
 
 
-@custom_login_required
+@login_required
 def user_profile(request):
     if request.method == 'POST':
 
@@ -320,7 +312,7 @@ def user_profile(request):
             profile = form.save(commit=False)
             profile.user = request.user
             profile.save()
-            messages.success(request, 'Profile created successfully! You can now view your orders')
+            messages.success(request, 'Profile created successfully!')
             return redirect('user_profile')
         else:
             messages.error(request, 'An error occurred while creating the profile.')
@@ -329,7 +321,7 @@ def user_profile(request):
 
     return render(request, 'user_profile.html', {'form': form})
 
-@custom_login_required
+@login_required
 def orders(request):
     profile = get_object_or_404(Profile, user=request.user)
     latest_order = Order.objects.filter(user=request.user).order_by('-created_at').first()
@@ -346,6 +338,15 @@ def orders(request):
     }
 
     return render(request, 'orders.html', context)
+
+def custom_login_required(view_func):
+    def wrapped_view(request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            messages.success(request, 'Please log in to view this part of the site')
+            messages.error(request, 'Please log in to view this part of the site.')
+            return redirect('user_login')  # Ensure this URL name matches your login view URL name
+        return view_func(request, *args, **kwargs)
+    return wrapped_view
 
 
 def handling_404(request, exception):

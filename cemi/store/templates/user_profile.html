@@ -3,16 +3,10 @@
 {% extends 'base.html' %}
 {% block title %}User Profile{% endblock %}
 {% block content %}
+    <a href="{% url 'user_logout' %}" style="color: red;" class="btn">Logout</a>
 
     <div class="container">
         <!-- Display success message -->
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-success" role="alert">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
 
         <div class="row">
             <div class="col-lg-6">
@@ -22,7 +16,7 @@
                     {% if user.profile %}
                         <p><strong>Email:</strong> {{ user.profile.email }}</p>
                         <p><strong>Spent:</strong> ksh. {{ user.profile.spent }}</p>
-                        
+
                         <p><strong>Joined:</strong> {{ user.profile.created_at|date:"F j, Y" }}</p>
                     {% else %}
                         <p>No profile found.</p>
