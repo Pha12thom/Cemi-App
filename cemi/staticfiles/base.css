@@ -1,0 +1,86 @@
+/* Resetting default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+main {
+    padding: 20px;
+}
+
+/* Sidebar Styles */
+#sidebar {
+    height: 100vh;
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+
+#sidebar .nav-link {
+    font-size: 1.1em;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+}
+
+#sidebar .nav-link:hover {
+    background-color: #ddd;
+    color: #000;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Dark Theme */
+.dark-theme {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.dark-theme header {
+    background-color: #1c1c1c;
+}
+
+.dark-theme footer {
+    background-color: #1c1c1c;
+}
+
+.dark-theme #sidebar {
+    background-color: #333;
+}
+
+.dark-theme #sidebar .nav-link {
+    color: #fff;
+}
+
+.dark-theme #sidebar .nav-link:hover {
+    background-color: #444;
+    color: #fff;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    #sidebar {
+        height: auto;
+    }
+    .sidebar .nav-item {
+        text-align: center;
+    }
+}
