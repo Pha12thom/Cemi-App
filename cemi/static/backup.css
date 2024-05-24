@@ -408,7 +408,7 @@ h1, h2 {
     white-space: nowrap;
     position: relative;
     
-    padding: 15px 0; /* Padding for better spacing */
+    padding: 10px 0; /* Padding for better spacing */
 }
 
 /* Marquee styling */
