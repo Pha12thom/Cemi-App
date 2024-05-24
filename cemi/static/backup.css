@@ -34,7 +34,7 @@ body {
 header {
     animation: fadeInOut 5s ease-in-out infinite;
   
-    background-color: #333;
+    background-color: #ffb10a;
     color: #fff;
     padding: 20px;
     text-align: center;
@@ -52,7 +52,7 @@ main {
     position: fixed;
     top: 0;
     left: -250px;
-    background-color: #343a40;
+    background-color: #ffb10a;
     padding-top: 60px; /* Space for the header */
     transition: left 0.3s ease;
     z-index: 1000;
@@ -109,7 +109,7 @@ main {
 
 /* Footer Styles */
 footer {
-    background-color: #333;
+    background-color:#ffb10a;
     color: #fff;
     padding: 10px;
     text-align: center;
@@ -402,6 +402,7 @@ h1, h2 {
 
 /* Add these styles to the end of your styles.css file */
 .marquee-container {
+    border-radius: 30px;
     background-image: url('shop.jpeg');
     background-size: cover;
     overflow: hidden;
@@ -433,4 +434,40 @@ h1, h2 {
     width: 200px;  /* Adjust the width as needed */
     margin: 0 15px; /* Spacing between images */
     display: inline-block;
+}
+
+.review-form {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.review-form h3 {
+    margin-bottom: 15px;
+}
+
+.review-form .form-control {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.review-form .btn {
+    background-color: #343a40;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.review-form .btn:hover {
+    background-color: #495057;
+}
+.bg-dark-subtle {
+    background-color: #e68a1d !important;
 }

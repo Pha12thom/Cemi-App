@@ -13,7 +13,7 @@
 <div class="marquee-container">
     <div class="marquee">
         {% for item in items_page %}
-            <img src="{{ item.images.url }}" height="200px" width="200px" alt="{{ item.name }}"> <span class="item-tag">{{ item.sold }}</span>
+            <img src="{{ item.images.url }}" style="border: 5px solid yellow; border-radius: 30px" width="200px" width="200px" alt="{{ item.name }}"> <span class="item-tag">{{ item.sold }}</span>
            
 
         {% endfor %}

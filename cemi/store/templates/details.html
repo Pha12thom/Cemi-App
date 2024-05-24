@@ -1,4 +1,3 @@
-
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Details - Your Store {% endblock %}
@@ -6,7 +5,7 @@
 
 {% block content %}
 <div class="product-details">
-    <img src="{{ item.images.url }}" alt="{{ item.name }}">
+    <img src="{{ item.images.url }}" alt="{{ item.name }}" width="200px">
     <h2>{{ item.name }}</h2>
     <p>{{ item.description }}</p>
     <p class="price">ksh. {{ item.price }}</p>
@@ -15,8 +14,8 @@
         <input type="hidden" name="item_id" value="{{ item.id }}">
         <button type="submit" class="btn bg-dark-subtle">Add to Cart</button>
     </form>
-    
 </div>
+<hr>
 <!-- User Reviews Section -->
 <div class="user-reviews">
     <h3>User Reviews</h3>
@@ -24,8 +23,9 @@
         <ol>
             {% for review in reviews %}
                 <li>
-                    <p>{{ review.content }} Rating: {{ review.rating }}</p>
-                    
+                    <p>{{ review.user }} - Review  {{ review.content }} - Rating: {{ review.rating }}</p>
+                 
+                   
                     <!-- Add more details about the review if needed -->
                 </li>
             {% endfor %}
@@ -34,7 +34,7 @@
         <p>No reviews available for this item.</p>
     {% endif %}
 </div>
-
+<hr>
 <!-- Review Form Section -->
 <div class="review-form">
     <h3>Add Your Review</h3>
@@ -43,6 +43,15 @@
         {{ form.as_p }}
         <button type="submit" class="btn bg-dark-subtle">Submit Review</button>
     </form>
+</div>
+<hr>
+<h2>Related Items</h2>
+<div class="marquee-container">
+    <div class="marquee">
+        {% for item in items_page %}
+            <img src="{{ item.images.url }}" style="border: 5px solid yellow; border-radius: 30px" height="200px" width="200px" alt="{{ item.name }}">
+        {% endfor %}
+    </div>
 </div>
 
 {% endblock %}
