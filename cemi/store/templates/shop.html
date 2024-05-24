@@ -10,9 +10,17 @@
     <input type="search" name="q" placeholder="Search for items" width="100%" style="margin-left: 0%;">
     <button type="submit bg-dark" class="btn bg-dark-subtle">Search</button>
 </form>
+<div class="marquee-container">
+    <div class="marquee">
+        {% for item in items_page %}
+            <img src="{{ item.images.url }}" height="200px" width="200px" alt="{{ item.name }}">
+        {% endfor %}
+    </div>
+</div>
 <nav>
 
     <section class="products">
+        
         {% for item in items_page %}
         <div class="product">
             {% if item.sold %}

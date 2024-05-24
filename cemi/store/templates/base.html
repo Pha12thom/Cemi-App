@@ -23,7 +23,12 @@
     <header>
         <div class="toggle-sidebar" id="toggle-sidebar">&#9776;</div> 
       
-        <h1>{% block heading %}{% endblock %}</h1>
+        <h1>{% block heading %}
+            {% if cart %}     
+            <a href="{% url 'cart' %}"  style="color: red;"><img src="{% static 'cart.png' %}" width="30px">{{ total_quantity }}</a>            
+        {% endif %}
+        {% endblock %}</h1>
+        
     </header>
     <div id="sidebar" class="sidebar">
         <button id="close-sidebar" class="btn btn-danger">&times;</button>

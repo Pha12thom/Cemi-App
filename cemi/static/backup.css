@@ -10,13 +10,30 @@
     padding: 0;
     box-sizing: border-box;
 }
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
 
 /* General Styles */
 body {
     font-family: Arial, sans-serif;
+  
+    background-repeat: no-repeat;
+    background-size: cover; /* Cover the entire background */
+    background-position: center;
 }
 
 header {
+    animation: fadeInOut 5s ease-in-out infinite;
+  
     background-color: #333;
     color: #fff;
     padding: 20px;
@@ -375,9 +392,45 @@ textarea#id_delivery_address {
     padding: 20px;
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    color: #0f5598;
+    color: #0b141b;
 }
 
 h1, h2 {
     color: #3691ed;
+}
+
+
+/* Add these styles to the end of your styles.css file */
+.marquee-container {
+    background-image: url('shop.jpeg');
+    background-size: cover;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    
+    padding: 15px 0; /* Padding for better spacing */
+}
+
+/* Marquee styling */
+.marquee {
+    display: inline-block;
+    animation: marquee 10s linear infinite;
+}
+
+/* Keyframes for the marquee animation */
+@keyframes marquee {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Image styling within the marquee */
+.marquee img {
+    height: 200px; /* Adjust the height as needed */
+    width: 200px;  /* Adjust the width as needed */
+    margin: 0 15px; /* Spacing between images */
+    display: inline-block;
 }
