@@ -52,3 +52,12 @@ class ProfileForm(forms.ModelForm):
             'phone_number': forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Enter your phone number'}),
             'address': forms.TextInput(attrs={'class': 'form-control form-control-sm', 'placeholder': 'Enter your address'}),
         }
+        
+# forms.py
+from django import forms
+from .models import Review
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['content', 'rating']

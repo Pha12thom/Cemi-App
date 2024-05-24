@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Store, items, Profile
+from .models import Store, items, Profile, Review
 from .cart import Cart
 from django.contrib import messages
 from django.http import JsonResponse
-from .forms import RegisterForm, LoginForm, LogoutForm, UserProfileForm
+from .forms import RegisterForm, LoginForm, LogoutForm, UserProfileForm, ReviewForm
 from decimal import Decimal
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
@@ -116,7 +116,15 @@ def base(request):
     }
     return render(request, 'base.html', context)
 
-@custom_login_required
+# views.py
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import items, Review
+from .forms import ReviewForm
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
+
+@login_required
 def details(request, item_id):
     item = get_object_or_404(items, pk=item_id)
     user_page = Profile.objects.all()
@@ -124,16 +132,39 @@ def details(request, item_id):
     items_page = items.objects.all()
     cart = Cart(request)
     total_quantity = sum(item['quantity'] for item in cart.cart.values())
+
+    # Fetch reviews for the specific item
+    reviews = Review.objects.filter(item=item)
+
+    # Handle review form submission
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.item = item
+            review.user = request.user
+            review.save()
+            messages.success(request, 'Your review has been submitted successfully.')
+            return redirect('details', item_id=item_id)
+        else:
+            messages.error(request, 'Failed to submit review. Please check the form data.')
+    else:
+        form = ReviewForm()
+
     context = {
         'user_page': user_page,
         'store_page': store_page,
         'items_page': items_page,
         'item': item,
+        'reviews': reviews,  # Pass the reviews to the template
         'total_quantity': total_quantity,
         'cart': cart,
+        'form': form,  # Pass the review form to the template
     }
 
     return render(request, 'details.html', context)
+
+
 
 @custom_login_required
 def cart(request):

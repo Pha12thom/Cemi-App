@@ -16,10 +16,11 @@
         {% for item in items_page %}
         <div class="product">
             {% if item.sold %}
+        
             <span class="item-tag">{{ item.sold }}</span>
             {% endif %}
             <img src="{{ item.images.url }}" height="200px" width="200px" alt="{{ item.name }}">
-            <p class="badge bg-dark">{{ item.short_description }}</p>
+            
             <p>{{ item.name }}</p>
             <s style="color: red;">Was: ksh {{ item.discount }} </s>
             <p class="price">ksh. {{ item.price }}</p>

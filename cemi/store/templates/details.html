@@ -15,5 +15,34 @@
         <input type="hidden" name="item_id" value="{{ item.id }}">
         <button type="submit" class="btn bg-dark-subtle">Add to Cart</button>
     </form>
+    
 </div>
+<!-- User Reviews Section -->
+<div class="user-reviews">
+    <h3>User Reviews</h3>
+    {% if reviews %}
+        <ol>
+            {% for review in reviews %}
+                <li>
+                    <p>{{ review.content }} Rating: {{ review.rating }}</p>
+                    
+                    <!-- Add more details about the review if needed -->
+                </li>
+            {% endfor %}
+        </ol>
+    {% else %}
+        <p>No reviews available for this item.</p>
+    {% endif %}
+</div>
+
+<!-- Review Form Section -->
+<div class="review-form">
+    <h3>Add Your Review</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn bg-dark-subtle">Submit Review</button>
+    </form>
+</div>
+
 {% endblock %}
