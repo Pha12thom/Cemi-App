@@ -1,0 +1,24 @@
+<!-- shop_category.html -->
+{% extends 'base.html' %}
+
+{% block title %}{{ category|title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>{{ category|title }}</h2>
+    <div class="row">
+        {% for item in items %}
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{{ item.images.url }}" class="card-img-top" alt="{{ item.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.name }}</h5>
+                    <p class="card-text">${{ item.price }}</p>
+                    <a href="{% url 'details' item.id %}" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

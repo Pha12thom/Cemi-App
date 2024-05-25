@@ -10,7 +10,6 @@
     <script src="//cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-  
 </head>
 <body>
     {% if messages %}
@@ -22,25 +21,36 @@
     {% endif %}
     <header>
         <div class="toggle-sidebar" id="toggle-sidebar">&#9776;</div> 
-      
         <h1>{% block heading %}
             {% if cart %}     
-            <a href="{% url 'cart' %}"  style="color: red;"><img src="{% static 'cart.png' %}" width="30px">{{ total_quantity }}</a>            
-        {% endif %}
+                <a href="{% url 'cart' %}" style="color: red;">
+                    <img src="{% static 'cart.png' %}" width="30px">{{ total_quantity }}
+                </a>            
+            {% endif %}
         {% endblock %}</h1>
-        
     </header>
-    <div id="sidebar" class="sidebar">
-        <button id="close-sidebar" class="btn btn-danger">&times;</button>
-        <a href="{% url 'user_profile' %}" onclick="closeMenu()">User profile</a>
-        <a href="{% url 'home' %}" onclick="closeMenu()">Home</a>
-        <a href="{% url 'shop' %}" onclick="closeMenu()">Shop</a>
-        <a href="{% url 'orders' %}" onclick="closeMenu()">My orders</a>
-        <a href="{% url 'about' %}" onclick="closeMenu()">About us</a>
-        {% if cart %}     
-            <a href="{% url 'cart' %}" onclick="closeMenu()" style="color: red;"><img src="{% static 'cart.png' %}" width="30px">{{ total_quantity }}</a>            
-        {% endif %}
-    </div>
+   <!-- base.html -->
+<div id="sidebar" class="sidebar">
+    <button id="close-sidebar" class="btn btn-danger">&times;</button>
+    <a href="{% url 'user_profile' %}" onclick="closeMenu()">User profile</a>
+    <a href="{% url 'home' %}" onclick="closeMenu()">Home</a>
+    <a href="{% url 'shop' %}" onclick="closeMenu()">Shop</a>
+    <a href="{% url 'orders' %}" onclick="closeMenu()">My orders</a>
+    <a href="{% url 'about' %}" onclick="closeMenu()">About us</a>
+    {% if cart %}     
+        <a href="{% url 'cart' %}" onclick="closeMenu()" style="color: red;"><img src="{% static 'cart.png' %}" width="30px">{{ total_quantity }}</a>            
+    {% endif %}
+    <!-- Category Links -->
+   
+    <option><a href="{% url 'shop_category' 'televisions' %}" onclick="closeMenu()">Televisions</a></option>
+    <a href="{% url 'shop_category' 'shoes' %}" onclick="closeMenu()">Shoes</a>
+    <a href="{% url 'shop_category' 'cutleries' %}" onclick="closeMenu()">Cutleries</a>
+    <a href="{% url 'shop_category' 'electrical_appliances' %}" onclick="closeMenu()">Electrical Appliances</a>
+    <a href="{% url 'shop_category' 'clothes' %}" onclick="closeMenu()">Clothes</a>
+    <a href="{% url 'shop_category' 'housewares' %}" onclick="closeMenu()">Housewares</a>
+    
+</div>
+
     <div class="container-fluid">
         <div class="row">
             <main class="col-md-12 ms-sm-auto col-lg-10 px-md-4">
@@ -64,6 +74,5 @@
             document.getElementById('sidebar').classList.remove('active');
         }
     </script>
-    
-    
+</body>
 </html>

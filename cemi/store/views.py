@@ -422,3 +422,18 @@ def activate(request, uidb64, token):
     else:
         messages.error(request, 'The confirmation link was invalid, possibly because it has already been used.')
         return redirect('user_register')
+
+
+# views.py
+def shop_category(request, category):
+    items_by_category = items.objects.filter(category=category)
+    cart = Cart(request)
+    total_quantity = sum(item['quantity'] for item in cart.cart.values())
+
+    context = {
+        'items': items_by_category,
+        'category': category,
+        'cart': cart,
+        'total_quantity': total_quantity,
+    }
+    return render(request, 'shop_category.html', context)

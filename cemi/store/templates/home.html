@@ -8,6 +8,29 @@
     <p>Discover a wide range of products.
     Welcome to Cemi Online Store, your one-stop destination for all your home equipment needs. Whether you're looking for kitchen appliances, furniture, electronics, or any other essential items for your home, we have a wide range of high-quality products to choose from. Our store is designed to provide you with a seamless shopping experience, allowing you to browse through our extensive collection and find exactly what you're looking for. With our user-friendly interface and secure payment options, you can shop with confidence and convenience. We are committed to delivering exceptional customer service and ensuring your satisfaction with every purchase. So why wait? Start exploring our featured products and discover the perfect additions to your home today. Shop now and transform your living space into a haven of comfort and style.</p>
 </section>
+<div class="container">
+    <h1>Shop by Category</h1>
+    <div class="row">
+        <div class="col-md-2">
+            <a href="{% url 'shop_category' 'televisions' %}" class="btn btn-outline-primary">Televisions</a>
+        </div>
+        <div class="col-md-2">
+            <a href="{% url 'shop_category' 'shoes' %}" class="btn btn-outline-primary">Shoes</a>
+        </div>
+        <div class="col-md-2">
+            <a href="{% url 'shop_category' 'cutleries' %}" class="btn btn-outline-primary">Cutleries</a>
+        </div>
+        <div class="col-md-2">
+            <a href="{% url 'shop_category' 'electrical_appliances' %}" class="btn btn-outline-primary">Electrical Appliances</a>
+        </div>
+        <div class="col-md-2">
+            <a href="{% url 'shop_category' 'clothes' %}" class="btn btn-outline-primary">Clothes</a>
+        </div>
+        <div class="col-md-2">
+            <a href="{% url 'shop_category' 'housewares' %}" class="btn btn-outline-primary">Housewares</a>
+        </div>
+    </div>
+</div>
 
 <div class="feature">
     <h2 class="animated fadeInDown">Featured Products</h2>
@@ -26,6 +49,10 @@
         <p class="price">Now ksh. {{ item.price }}</p>
         <a href="{% url 'details' item.id %}" class="btn bg-dark-subtle">View Item</a>
     </div>
+
     {% endfor %}
+    <!-- shop.html or home.html -->
+
+
 </section>
 {% endblock %}

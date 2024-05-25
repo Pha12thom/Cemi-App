@@ -20,6 +20,31 @@
     </div>
 </div>
 <nav>
+    <!-- shop.html or home.html -->
+<div class="container">
+    <h1>Shop by Category</h1>
+    <div class="row">
+        <div class="col-md-2">
+            <a href="{% url 'shop_category' 'televisions' %}" class="btn btn-outline-primary">Televisions</a>
+        </div>
+        <div class="col-md-2">
+            <a href="{% url 'shop_category' 'shoes' %}" class="btn btn-outline-primary">Shoes</a>
+        </div>
+        <div class="col-md-2">
+            <a href="{% url 'shop_category' 'cutleries' %}" class="btn btn-outline-primary">Cutleries</a>
+        </div>
+        <div class="col-md-2">
+            <a href="{% url 'shop_category' 'electrical_appliances' %}" class="btn btn-outline-primary">Electrical Appliances</a>
+        </div>
+        <div class="col-md-2">
+            <a href="{% url 'shop_category' 'clothes' %}" class="btn btn-outline-primary">Clothes</a>
+        </div>
+        <div class="col-md-2">
+            <a href="{% url 'shop_category' 'housewares' %}" class="btn btn-outline-primary">Housewares</a>
+        </div>
+    </div>
+</div>
+
 
     <section class="products">
         

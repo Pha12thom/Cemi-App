@@ -7,4 +7,5 @@ admin.site.register(items)
 admin.site.register(Order)
 admin.site.register(cart)
 admin.site.register(Review)
+
 # Register your models here.

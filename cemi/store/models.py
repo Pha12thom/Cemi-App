@@ -34,7 +34,18 @@ class items(models.Model):
         ('off 50%', 'off 50%'),
         ('off 30%', 'off 30%'),
     ]
-
+    CATEGORY_CHOICES = [
+        ('televisions', 'Televisions'),
+        ('shoes', 'Shoes'),
+        ('cutleries', 'Cutleries'),
+        ('electrical_appliances', 'Electrical Appliances'),
+        ('clothes', 'Clothes'),
+        ('housewares', 'Housewares'),
+        # Add more categories as needed
+    ]
+    
+ 
+    category = models.CharField(null=True, max_length=50, choices=CATEGORY_CHOICES)
     name = models.CharField(max_length=100)
     short_description = models.CharField(max_length=100, null=True)
     description = models.TextField()
@@ -107,3 +118,10 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Review for {self.item.name} by {self.user.username}"
+
+
+
+# models.py
+from django.db import models
+
+
