@@ -403,7 +403,7 @@ h1, h2 {
 /* Add these styles to the end of your styles.css file */
 .marquee-container {
     border-radius: 30px;
-    background-image: url('shop.jpeg');
+    background-image: url("shop.7f96cb667e58.jpeg");
     background-size: cover;
     overflow: hidden;
     white-space: nowrap;
