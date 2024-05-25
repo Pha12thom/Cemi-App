@@ -34,7 +34,7 @@ body {
 header {
     animation: fadeInOut 5s ease-in-out infinite;
   
-    background-color: #ffb10a;
+    background-color: #600da5;
     color: #fff;
     padding: 20px;
     text-align: center;
@@ -52,7 +52,7 @@ main {
     position: fixed;
     top: 0;
     left: -250px;
-    background-color: #ffb10a;
+    background-color: #5f0a79;
     padding-top: 60px; /* Space for the header */
     transition: left 0.3s ease;
     z-index: 1000;
@@ -109,7 +109,7 @@ main {
 
 /* Footer Styles */
 footer {
-    background-color:#ffb10a;
+    background-color:#7c0a99;
     color: #fff;
     padding: 10px;
     text-align: center;
