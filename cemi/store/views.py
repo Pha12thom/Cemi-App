@@ -50,9 +50,8 @@ def user_register(request):
             user.is_active = False  # User is not active until they confirm their email
             user.save()
             
-            activateEmail(request, user, form.cleaned_data.get('email'))
-            messages.success(request, 'Please confirm your email address to complete the registration.')
-
+            activateEmail(request, user, email)
+            messages.success(request, f'You have successfully registered. \n Your account activation link has been sent to  {email}. please check your email for account activation.')
             return redirect('shop')
     return render(request, 'register.html', {'form': form})
 
