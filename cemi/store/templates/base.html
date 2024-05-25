@@ -41,14 +41,28 @@
         <a href="{% url 'cart' %}" onclick="closeMenu()" style="color: red;"><img src="{% static 'cart.png' %}" width="30px">{{ total_quantity }}</a>            
     {% endif %}
     <!-- Category Links -->
-   
-    <option><a href="{% url 'shop_category' 'televisions' %}" onclick="closeMenu()">Televisions</a></option>
-    <a href="{% url 'shop_category' 'shoes' %}" onclick="closeMenu()">Shoes</a>
-    <a href="{% url 'shop_category' 'cutleries' %}" onclick="closeMenu()">Cutleries</a>
-    <a href="{% url 'shop_category' 'electrical_appliances' %}" onclick="closeMenu()">Electrical Appliances</a>
-    <a href="{% url 'shop_category' 'clothes' %}" onclick="closeMenu()">Clothes</a>
-    <a href="{% url 'shop_category' 'housewares' %}" onclick="closeMenu()">Housewares</a>
-    
+  <!-- part of your template, e.g., base.html or a specific template -->
+<select id="category-select" onchange="navigateToCategory()">
+    <option value="">Select Category</option>
+    <option value="{% url 'shop_category' 'televisions' %}">Televisions</option>
+    <option value="{% url 'shop_category' 'shoes' %}">Shoes</option>
+    <option value="{% url 'shop_category' 'cutleries' %}">Cutleries</option>
+    <option value="{% url 'shop_category' 'electrical_appliances' %}">Electricals</option>
+    <option value="{% url 'shop_category' 'clothes' %}">Clothes</option>
+    <option value="{% url 'shop_category' 'housewares' %}">Housewares</option>
+</select>
+
+<script>
+    function navigateToCategory() {
+        var select = document.getElementById("category-select");
+        var url = select.value;
+        if (url) {
+            window.location.href = url;
+        }
+    }
+</script>
+
+
 </div>
 
     <div class="container-fluid">

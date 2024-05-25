@@ -7,8 +7,8 @@
 {% block content %}
 <h2>View and search items in our store</h2>
 <form action="#" method="GET">
-    <input type="search" name="q" placeholder="Search for items" width="100%" style="margin-left: 0%;">
-    <button type="submit bg-dark" class="btn bg-dark-subtle">Search</button>
+    <input type="search" name="q" placeholder="Search for items" width="100%" style="margin-left: 0%; border-radius: 10px; background-color: rgb(214, 200, 226);">
+    <button type="submit bg-dark" style="border-radius: 10px;" class="btn bg-dark-subtle">Search</button>
 </form>
 <div class="marquee-container">
     <div class="marquee">
@@ -34,7 +34,7 @@
             <a href="{% url 'shop_category' 'cutleries' %}" class="btn btn-outline-primary">Cutleries</a>
         </div>
         <div class="col-md-2">
-            <a href="{% url 'shop_category' 'electrical_appliances' %}" class="btn btn-outline-primary">Electrical Appliances</a>
+            <a href="{% url 'shop_category' 'electrical_appliances' %}" class="btn btn-outline-primary">Electrical</a>
         </div>
         <div class="col-md-2">
             <a href="{% url 'shop_category' 'clothes' %}" class="btn btn-outline-primary">Clothes</a>
