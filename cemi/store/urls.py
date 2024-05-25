@@ -19,6 +19,7 @@ urlpatterns = [
     path('order/' , views.order, name='order'),
     path('orders/', views.orders, name='orders'),
     path('handling_404/', views.handling_404, name='handling_404'),
+    path('activate/<uidb64>/<token>/', views.activate, name='activate'),
 
 
 

@@ -29,22 +29,35 @@ def custom_login_required(view_func):
 def activateEmail(request, user, to_email):
     messages.success(request, f'You have successfully registered. \n Please check your email {to_email} to activate your account.')
 
+# views.py
+
+
+
+from django.contrib.auth import login
+from django.contrib import messages
+from django.shortcuts import render, redirect
+from .forms import RegisterForm
+from .utils import activateEmail  # Ensure this import is correct
+
 def user_register(request):
-    form = RegisterForm(request.POST)
+    form = RegisterForm(request.POST or None)
     if request.method == 'POST':
         if form.is_valid():
-            username = form.data['username']
-            password = form.data['password']
-            email = form.data['email']
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            email = form.cleaned_data['email']
             user = User.objects.create_user(username=username, password=password, email=email)
-            user.is_active = True
+            user.is_active = False  # User is not active until they confirm their email
             user.save()
+            
             activateEmail(request, user, form.cleaned_data.get('email'))
+            messages.success(request, 'Please confirm your email address to complete the registration.')
 
-            login(request, user)
-            messages.success(request, 'You have successfully registered.')
             return redirect('shop')
     return render(request, 'register.html', {'form': form})
+
+
+
 
 
 def user_login(request):
@@ -92,6 +105,8 @@ def home(request):
 
     }
     return render(request, 'home.html', context)
+
+
 
 
 
@@ -381,3 +396,30 @@ def orders(request):
 
 def handling_404(request, exception):
     return render(request, '404.html', status=404)
+
+
+
+
+# views.py
+
+from django.shortcuts import render, redirect
+from django.utils.http import urlsafe_base64_decode
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth.models import User
+from django.contrib import messages
+
+def activate(request, uidb64, token):
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and default_token_generator.check_token(user, token):
+        user.is_active = True
+        user.save()
+        messages.success(request, 'Your account has been confirmed.')
+        return redirect('user_login')
+    else:
+        messages.error(request, 'The confirmation link was invalid, possibly because it has already been used.')
+        return redirect('user_register')
