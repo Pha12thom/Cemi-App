@@ -11,30 +11,112 @@
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <style>
-        /* Loader styles */
+        /* Loader Styles */
         #loader {
             position: fixed;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
+            background-color: white;
             z-index: 9999;
-            background: rgba(255, 255, 255, 0.8);
             display: flex;
             justify-content: center;
             align-items: center;
         }
-
         #loader img {
-            width: 100px; /* Adjust as needed */
-            height: 100px; /* Adjust as needed */
+            width: 100px; /* Adjust the size of the loader image */
+            animation: spin 2s linear infinite; /* Slower spin */
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            left: -250px;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background: #343a40;
+            transition: left 0.3s ease;
+            padding-top: 60px;
+        }
+        .sidebar.active {
+            left: 0;
+        }
+        .sidebar a {
+            padding: 15px 20px;
+            text-decoration: none;
+            font-size: 1.1em;
+            color: #ddd;
+            display: block;
+        }
+        .sidebar a:hover {
+            background: #575d63;
+            color: #fff;
+        }
+        #close-sidebar {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        /* Custom Header Styles */
+        header {
+            background-color: #f8f9fa;
+            padding: 10px 0;
+            border-bottom: 1px solid #e3e6e8;
+        }
+        .navbar-brand img {
+            width: 100px; /* Adjust logo size */
+            border-radius: 30px;
+        }
+        /* Footer Styles */
+        footer {
+            background-color: #343a40;
+            color: #fff;
+            padding: 40px 0;
+        }
+        footer .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+        }
+        footer .footer-links a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+        footer .social-icons a {
+            color: #ddd;
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 1.5em;
+        }
+        footer .social-icons a:hover {
+            color: #fff;
+        }
+        footer .subscribe-form input[type="email"] {
+            width: 70%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+        }
+        footer .subscribe-form button {
+            padding: 10px;
+            border: none;
+            background: #28a745;
+            color: white;
+            border-radius: 0 5px 5px 0;
+        }
+        footer .subscribe-form button:hover {
+            background: #218838;
         }
     </style>
 </head>
 <body>
-    <!-- Loader HTML -->
+    <!-- Loader -->
     <div id="loader">
-        <img src="{% static 'cart.png' %}" alt="Loading..." label="loading...." style="color: purple; border-radius: 50px;">
+        <img src="{% static 'cart.png' %}" alt="Loading..." width="100px">
     </div>
 
     {% if messages %}
@@ -44,16 +126,86 @@
             </div>
         {% endfor %}
     {% endif %}
+
+    <!-- Header -->
     <header>
-        <div class="toggle-sidebar" id="toggle-sidebar">&#9776;</div> 
-        <h1>{% block heading %}
-            {% if cart %}     
-                <a href="{% url 'cart' %}" style="color: red;">
-                    <img src="{% static 'cart.png' %}" width="30px">{{ total_quantity }}
-                </a>            
-            {% endif %}
-        {% endblock %}</h1>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'home' %}">
+                    <img src="{% static 'cemi.png' %}" alt="Cemi Store Logo" width="70px">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'shop' %}">Shop</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'orders' %}">My orders</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Categories
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{% url 'shop_category' 'televisions' %}">Televisions</a></li>
+                                <li><a class="dropdown-item" href="{% url 'shop_category' 'shoes' %}">Shoes</a></li>
+                                <li><a class="dropdown-item" href="{% url 'shop_category' 'cutleries' %}">Cutleries</a></li>
+                                <li><a class="dropdown-item" href="{% url 'shop_category' 'electrical_appliances' %}">Electricals</a></li>
+                                <li><a class="dropdown-item" href="{% url 'shop_category' 'clothes' %}">Clothes</a></li>
+                                <li><a class="dropdown-item" href="{% url 'shop_category' 'housewares' %}">Housewares</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'about' %}">About Us</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex" action="{% url 'shop' %}" method="get">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'cart' %}">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    <span class="badge bg-danger">{{ total_quantity }}</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'user_profile' %}">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'user_logout' %}">Logout</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'user_login' %}">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'user_register' %}">Register</a>
+                            </li>
+                        {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </header>
+
     <!-- Sidebar -->
     <div id="sidebar" class="sidebar">
         <button id="close-sidebar" class="btn btn-danger">&times;</button>
@@ -65,26 +217,6 @@
         {% if cart %}     
             <a href="{% url 'cart' %}" onclick="closeMenu()" style="color: red;"><img src="{% static 'cart.png' %}" width="30px">{{ total_quantity }}</a>            
         {% endif %}
-        <!-- Category Links -->
-        <select id="category-select" onchange="navigateToCategory()">
-            <option value="">Select Category</option>
-            <option value="{% url 'shop_category' 'televisions' %}">Televisions</option>
-            <option value="{% url 'shop_category' 'shoes' %}">Shoes</option>
-            <option value="{% url 'shop_category' 'cutleries' %}">Cutleries</option>
-            <option value="{% url 'shop_category' 'electrical_appliances' %}">Electricals</option>
-            <option value="{% url 'shop_category' 'clothes' %}">Clothes</option>
-            <option value="{% url 'shop_category' 'housewares' %}">Housewares</option>
-        </select>
-
-        <script>
-            function navigateToCategory() {
-                var select = document.getElementById("category-select");
-                var url = select.value;
-                if (url) {
-                    window.location.href = url;
-                }
-            }
-        </script>
     </div>
 
     <div class="container-fluid">
@@ -94,10 +226,54 @@
             </main>
         </div>
     </div>
-    <footer class="text-center">
-        <p>&copy; {% now "Y" %} Cemi Store. All rights reserved.</p>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>About Us</h5>
+                    <p>Welcome to Cemi Online Store, your one-stop destination for all your home equipment needs. We provide high-quality products with exceptional customer service.</p>
+                </div>
+                <div class="col-md-2">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'shop' %}">Shop</a></li>
+                        <li><a href="{% url 'orders' %}">My Orders</a></li>
+                        <li><a href="{% url 'about' %}">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Contact Us</h5>
+                    <p>Email: geofreymilugo@gmail.com</p>
+                    <p>Phone: +254112155880</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.twitter.com/milugo_g" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/milugo_g" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <h5>Newsletter</h5>
+                    <form class="subscribe-form">
+                        <input type="email" placeholder="Enter your email">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; {% now "Y" %} Cemi Store. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
+
     <script>
+        // Loader
+        $(window).on('load', function() {
+            $('#loader').fadeOut(3000); // Increase the duration to 3000ms (3 seconds)
+        });
+    
+        // Sidebar toggle
         document.getElementById('toggle-sidebar').addEventListener('click', function() {
             document.getElementById('sidebar').classList.add('active');
         });
@@ -109,13 +285,7 @@
         function closeMenu() {
             document.getElementById('sidebar').classList.remove('active');
         }
-
-        // Hide loader when page is fully loaded with a delay
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.getElementById('loader').style.display = 'none';
-            }, 2000); // Adjust the delay time (in milliseconds) as needed
-        });
     </script>
+    
 </body>
 </html>

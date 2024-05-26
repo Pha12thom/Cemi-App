@@ -34,8 +34,7 @@ body {
 }
 
 header {
-    
-    background-color: #860c72;
+    animation: fadeInOut 5s ease-in-out infinite;
   
     color: #fff;
     padding: 20px;
@@ -54,7 +53,6 @@ main {
     position: fixed;
     top: 0;
     left: -250px;
-    background-color: #333;
   
     padding-top: 60px; /* Space for the header */
     transition: left 0.3s ease;
@@ -406,7 +404,7 @@ h1, h2 {
 /* Add these styles to the end of your styles.css file */
 .marquee-container {
     border-radius: 30px;
-    background-image: url('aisle-cart-commerce-food.jpg');
+    background-image: url("aisle-cart-commerce-food.87ddf1b37d5e.jpg");
     background-size: cover;
     overflow: hidden;
     white-space: nowrap;

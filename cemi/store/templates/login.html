@@ -1,24 +1,130 @@
-{% extends 'main.html' %}
+{% extends 'base.html' %}
 {% block title %}User Login{% endblock %}
 {% block heading %}Welcome{% endblock %}
 {% block content %}
-
-<div class="container">
-    <div class="form-container">
-        <h1>Login to cemi shop </h1>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" id="login-btn">Login</button>
-        </form>
-        <br><br>
-        <p> Don't have an account?<a href="{% url 'user_register' %}"> Register</a></p>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <!-- Form Container -->
+        <div class="col-md-6 col-lg-5">
+            <div class="form-container p-4 rounded shadow-sm">
+                <h1 class="text-center mb-4">Login to Cemi Shop</h1>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" id="login-btn" class="btn btn-primary w-100">Login</button>
+                </form>
+                <div class="text-center mt-4">
+                    <p>Don't have an account? <a href="{% url 'user_register' %}" class="text-primary">Register</a></p>
+                </div>
+            </div>
+        </div>
+        <!-- Description Section -->
+        <div class="col-md-6 col-lg-5 mt-4 mt-md-0">
+            <div class="description p-4 rounded shadow-sm">
+                <h2 class="text-center">Continue Shopping</h2>
+                <p class="text-center">Log in to access your account and explore our latest offers.</p>
+            </div>
+        </div>
     </div>
-    <div class="description">
-        <h2>Continue Shopping</h2>
-        <p>Log in to access your account and explore our latest offers.</p>
-    </div>
-
 </div>
-{% endblock %}
 
+<style>
+    .form-container {
+        background-color: #ffffff;
+        border: 1px solid #e3e6e8;
+    }
+    .description {
+        background-color: #f8f9fa;
+        border: 1px solid #e3e6e8;
+    }
+    #login-btn {
+        background-color: #007bff;
+        color: #ffffff;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    #login-btn:hover {
+        background-color: #0056b3;
+    }
+  
+    
+    .container {
+        max-width: 800px;
+        margin: 100px auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .form-container {
+        flex: 1;
+        padding-right: 30px;
+    }
+    
+    .form-container h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+    
+    .form-container input[type="text"],
+    .form-container input[type="email"],
+    .form-container input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+    }
+    
+    .form-container input[type="text"]:focus,
+    .form-container input[type="email"]:focus,
+    .form-container input[type="password"]:focus {
+        border-color: #4CAF50;
+    }
+    
+    .form-container button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    
+    .form-container button:hover {
+        background-color: #45a049;
+    }
+    
+    .description {
+        flex: 1;
+        padding-left: 30px;
+        background-image: url('main.jpg');
+        background-size: cover; /* Ensures the background image covers the entire container */
+        background-position: center; /* Centers the background image within the container */
+        color: #0c0303; /* Set text color to white for better visibility */
+    }
+    
+    
+    .description h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        
+    }
+    
+    .description p {
+        font-size: 16px;
+       
+    }
+   
+   
+</style>
+{% endblock %}

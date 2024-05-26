@@ -5,54 +5,107 @@
 
 {% block content %}
 <section class="hero">
-    <p>Discover a wide range of products.
-    Welcome to Cemi Online Store, your one-stop destination for all your home equipment needs. Whether you're looking for kitchen appliances, furniture, electronics, or any other essential items for your home, we have a wide range of high-quality products to choose from. Our store is designed to provide you with a seamless shopping experience, allowing you to browse through our extensive collection and find exactly what you're looking for. With our user-friendly interface and secure payment options, you can shop with confidence and convenience. We are committed to delivering exceptional customer service and ensuring your satisfaction with every purchase. So why wait? Start exploring our featured products and discover the perfect additions to your home today. Shop now and transform your living space into a haven of comfort and style.</p>
+    <p>Discover a wide range of products. Welcome to Cemi Online Store, your one-stop destination for all your home equipment needs. Whether you're looking for kitchen appliances, furniture, electronics, or any other essential items for your home, we have a wide range of high-quality products to choose from. Our store is designed to provide you with a seamless shopping experience, allowing you to browse through our extensive collection and find exactly what you're looking for. With our user-friendly interface and secure payment options, you can shop with confidence and convenience. We are committed to delivering exceptional customer service and ensuring your satisfaction with every purchase. So why wait? Start exploring our featured products and discover the perfect additions to your home today. Shop now and transform your living space into a haven of comfort and style.</p>
 </section>
-<div class="container">
-    <h1>Shop by Category</h1>
+
+<div class="container my-5">
+    <h1 class="text-center">Shop by Category</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-2 m-2">
+            <a href="{% url 'shop_category' 'televisions' %}" class="btn btn-outline-primary w-100">Televisions</a>
+        </div>
+        <div class="col-md-2 m-2">
+            <a href="{% url 'shop_category' 'shoes' %}" class="btn btn-outline-primary w-100">Shoes</a>
+        </div>
+        <div class="col-md-2 m-2">
+            <a href="{% url 'shop_category' 'cutleries' %}" class="btn btn-outline-primary w-100">Cutleries</a>
+        </div>
+        <div class="col-md-2 m-2">
+            <a href="{% url 'shop_category' 'electrical_appliances' %}" class="btn btn-outline-primary w-100">Electrical</a>
+        </div>
+        <div class="col-md-2 m-2">
+            <a href="{% url 'shop_category' 'clothes' %}" class="btn btn-outline-primary w-100">Clothes</a>
+        </div>
+        <div class="col-md-2 m-2">
+            <a href="{% url 'shop_category' 'housewares' %}" class="btn btn-outline-primary w-100">Housewares</a>
+        </div>
+    </div>
+</div>
+
+<div class="feature my-5">
+    <h2 class="text-center animated fadeInDown">Featured Products</h2>
+</div>
+
+<section class="products container">
     <div class="row">
-        <div class="col-md-2">
-            <a href="{% url 'shop_category' 'televisions' %}" class="btn btn-outline-primary">Televisions</a>
+        {% for item in items_page %}
+        <div class="col-md-4 mb-4">
+            <div class="card product-card animated fadeIn">
+                {% if item.sold %}
+                <span class="item-tag">{{ item.sold }}</span>
+                {% endif %}
+                <img src="{{ item.images.url }}" class="card-img-top" alt="{{ item.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.name }}</h5>
+                    <p class="card-text">
+                        <s class="text-danger">Was: ksh {{ item.discount }}</s><br>
+                        <span class="price">Now ksh. {{ item.price }}</span>
+                    </p>
+                    <a href="{% url 'details' item.id %}" class="btn btn-dark-subtle">View Item</a>
+                </div>
+            </div>
         </div>
-        <div class="col-md-2">
-            <a href="{% url 'shop_category' 'shoes' %}" class="btn btn-outline-primary">Shoes</a>
-        </div>
-        <div class="col-md-2">
-            <a href="{% url 'shop_category' 'cutleries' %}" class="btn btn-outline-primary">Cutleries</a>
-        </div>
-        <div class="col-md-2">
-            <a href="{% url 'shop_category' 'electrical_appliances' %}" class="btn btn-outline-primary">Electrical</a>
-        </div>
-        <div class="col-md-2">
-            <a href="{% url 'shop_category' 'clothes' %}" class="btn btn-outline-primary">Clothes</a>
-        </div>
-        <div class="col-md-2">
-            <a href="{% url 'shop_category' 'housewares' %}" class="btn btn-outline-primary">Housewares</a>
-        </div>
+        {% endfor %}
     </div>
-</div>
-
-<div class="feature">
-    <h2 class="animated fadeInDown">Featured Products</h2>
-</div>
-
-<section class="products">
-    {% for item in items_page %}
-    <div class="product animated fadeIn">
-        {% if item.sold %}
-        <span class="item-tag">{{ item.sold }}</span>
-        {% endif %}
-        <img src="{{ item.images.url }}" height="200px" width="200px" alt="{{ item.name }}">
-       
-        <p>{{ item.name }}</p>
-        <s style="color: red;">Was: ksh {{ item.discount }} </s>
-        <p class="price">Now ksh. {{ item.price }}</p>
-        <a href="{% url 'details' item.id %}" class="btn bg-dark-subtle">View Item</a>
-    </div>
-
-    {% endfor %}
-    <!-- shop.html or home.html -->
-
-
 </section>
+
+<style>
+    .hero {
+        background: #f8f9fa;
+        padding: 30px;
+        border-radius: 10px;
+        text-align: center;
+    }
+    .hero p {
+        font-size: 1.2rem;
+        color: #555;
+    }
+    .item-tag {
+        position: absolute;
+        background: red;
+        color: white;
+        padding: 5px;
+        border-radius: 50%;
+        top: 10px;
+        right: 10px;
+        font-size: 12px;
+    }
+    .product-card {
+        border: none;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .product-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    .card-title {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #333;
+    }
+    .price {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #28a745;
+    }
+    .container {
+        max-width: 1200px;
+        margin: auto;
+    }
+    .feature {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+</style>
 {% endblock %}

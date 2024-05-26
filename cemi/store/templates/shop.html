@@ -1,66 +1,94 @@
-
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}cemi shop{% endblock %}
-{% block heading %} Cemi shop {% endblock %}
+{% block title %}Cemi Shop{% endblock %}
+{% block heading %}Cemi Shop{% endblock %}
 
 {% block content %}
-<h2>View and search items in our store</h2>
-<form action="#" method="GET">
-    <input type="search" name="q" placeholder="Search for items" width="100%" style="margin-left: 0%; border-radius: 10px; background-color: rgb(214, 200, 226);">
-    <button type="submit bg-dark" style="border-radius: 10px;" class="btn bg-dark-subtle">Search</button>
-</form>
-<div class="marquee-container">
-    <div class="marquee">
-        {% for item in items_page %}
-            <img src="{{ item.images.url }}" style="border: 5px solid yellow; border-radius: 30px" width="200px" width="200px" alt="{{ item.name }}"> <span class="item-tag">{{ item.sold }}</span>
-           
+<div class="container mt-4">
+    <h2 class="text-center">View and Search Items in Our Store</h2>
 
-        {% endfor %}
-    </div>
-</div>
-<nav>
-    <!-- shop.html or home.html -->
-<div class="container">
-    <h1>Shop by Category</h1>
-    <div class="row">
-        <div class="col-md-2">
-            <a href="{% url 'shop_category' 'televisions' %}" class="btn btn-outline-primary">Televisions</a>
-        </div>
-        <div class="col-md-2">
-            <a href="{% url 'shop_category' 'shoes' %}" class="btn btn-outline-primary">Shoes</a>
-        </div>
-        <div class="col-md-2">
-            <a href="{% url 'shop_category' 'cutleries' %}" class="btn btn-outline-primary">Cutleries</a>
-        </div>
-        <div class="col-md-2">
-            <a href="{% url 'shop_category' 'electrical_appliances' %}" class="btn btn-outline-primary">Electrical</a>
-        </div>
-        <div class="col-md-2">
-            <a href="{% url 'shop_category' 'clothes' %}" class="btn btn-outline-primary">Clothes</a>
-        </div>
-        <div class="col-md-2">
-            <a href="{% url 'shop_category' 'housewares' %}" class="btn btn-outline-primary">Housewares</a>
+    <!-- Marquee for items -->
+   
+
+    <!-- Shop by Category -->
+    <div class="categories my-5">
+        <h3 class="text-center">Shop by Category</h3>
+        <div class="row text-center">
+            <div class="col-md-2 col-sm-4 my-2">
+                <a href="{% url 'shop_category' 'televisions' %}" class="btn btn-outline-primary w-100">Televisions</a>
+            </div>
+            <div class="col-md-2 col-sm-4 my-2">
+                <a href="{% url 'shop_category' 'shoes' %}" class="btn btn-outline-primary w-100">Shoes</a>
+            </div>
+            <div class="col-md-2 col-sm-4 my-2">
+                <a href="{% url 'shop_category' 'cutleries' %}" class="btn btn-outline-primary w-100">Cutleries</a>
+            </div>
+            <div class="col-md-2 col-sm-4 my-2">
+                <a href="{% url 'shop_category' 'electrical_appliances' %}" class="btn btn-outline-primary w-100">Electrical</a>
+            </div>
+            <div class="col-md-2 col-sm-4 my-2">
+                <a href="{% url 'shop_category' 'clothes' %}" class="btn btn-outline-primary w-100">Clothes</a>
+            </div>
+            <div class="col-md-2 col-sm-4 my-2">
+                <a href="{% url 'shop_category' 'housewares' %}" class="btn btn-outline-primary w-100">Housewares</a>
+            </div>
         </div>
     </div>
-</div>
 
-
+    <!-- Products Section -->
     <section class="products">
-        
-        {% for item in items_page %}
-        <div class="product">
-            {% if item.sold %}
-        
-            <span class="item-tag">{{ item.sold }}</span>
-            {% endif %}
-            <img src="{{ item.images.url }}" height="200px" width="200px" alt="{{ item.name }}">
-            
-            <p>{{ item.name }}</p>
-            <s style="color: red;">Was: ksh {{ item.discount }} </s>
-            <p class="price">ksh. {{ item.price }}</p>
-            <a href="{% url 'details' item.id %}" class="btn bg-dark-subtle">View Item</a>
+        <div class="row">
+            {% for item in items_page %}
+                <div class="col-md-3 col-sm-6 my-3">
+                    <div class="card product-card">
+                        <div class="card-body text-center">
+                            {% if item.sold %}
+                                <span class="item-tag badge bg-danger">{{ item.sold }}</span>
+                            {% endif %}
+                            <img src="{{ item.images.url }}" class="img-fluid" alt="{{ item.name }}">
+                            <h5 class="card-title mt-2">{{ item.name }}</h5>
+                            <p class="card-text text-muted"><s>Was: Ksh {{ item.discount }}</s></p>
+                            <p class="price text-primary">Ksh. {{ item.price }}</p>
+                            <a href="{% url 'details' item.id %}" class="btn btn-outline-dark">View Item</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </section>
+</div>
 {% endblock %}
+
+<style>
+   
+    .item-tag {
+        position: absolute;
+        background: red;
+        color: white;
+        padding: 5px;
+        border-radius: 50%;
+        top: 10px;
+        right: 10px;
+        font-size: 12px;
+    }
+    @keyframes marquee {
+        0% { transform: translateX(100%); }
+        100% { transform: translateX(-100%); }
+    }
+    .product-card {
+        border: none;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: transform 0.3s;
+    }
+    .product-card:hover {
+        transform: scale(1.05);
+    }
+    .card-title {
+        font-size: 1.1rem;
+        font-weight: bold;
+    }
+    .price {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+</style>

@@ -26,7 +26,7 @@
 body {
     font-family: Arial, sans-serif;
     backdrop-filter: blur(70px);
-    background-image: url('aisle-cart-commerce-food.jpg');
+    
   
     background-repeat: no-repeat;
     background-size: cover; /* Cover the entire background */
@@ -34,9 +34,9 @@ body {
 }
 
 header {
-    animation: fadeInOut 5s ease-in-out infinite;
+    
+    background-color: #860c72;
   
-    background-color: #600da5;
     color: #fff;
     padding: 20px;
     text-align: center;
@@ -54,7 +54,8 @@ main {
     position: fixed;
     top: 0;
     left: -250px;
-    background-color: #5f0a79;
+    background-color: #333;
+  
     padding-top: 60px; /* Space for the header */
     transition: left 0.3s ease;
     z-index: 1000;
