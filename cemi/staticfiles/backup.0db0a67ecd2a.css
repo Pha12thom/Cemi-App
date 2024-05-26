@@ -26,7 +26,7 @@
 body {
     font-family: Arial, sans-serif;
     backdrop-filter: blur(70px);
-    background-image: url('aisle-cart-commerce-food.jpg');
+    background-image: url("aisle-cart-commerce-food.87ddf1b37d5e.jpg");
   
     background-repeat: no-repeat;
     background-size: cover; /* Cover the entire background */
@@ -405,7 +405,7 @@ h1, h2 {
 /* Add these styles to the end of your styles.css file */
 .marquee-container {
     border-radius: 30px;
-    background-image: url('aisle-cart-commerce-food.jpg');
+    background-image: url("aisle-cart-commerce-food.87ddf1b37d5e.jpg");
     background-size: cover;
     overflow: hidden;
     white-space: nowrap;
