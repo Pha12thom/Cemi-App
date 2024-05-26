@@ -25,6 +25,8 @@
 /* General Styles */
 body {
     font-family: Arial, sans-serif;
+    backdrop-filter: blur(70px);
+    background-image: url('aisle-cart-commerce-food.jpg');
   
     background-repeat: no-repeat;
     background-size: cover; /* Cover the entire background */
@@ -403,7 +405,7 @@ h1, h2 {
 /* Add these styles to the end of your styles.css file */
 .marquee-container {
     border-radius: 30px;
-    background-image: url('shop.jpeg');
+    background-image: url('aisle-cart-commerce-food.jpg');
     background-size: cover;
     overflow: hidden;
     white-space: nowrap;
@@ -490,7 +492,7 @@ h1, h2 {
 }
 
 #category-select:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    border-color: #860c72;
+    box-shadow: 0 0 5px rgba(96, 3, 114, 0.5);
     outline: none;
 }
