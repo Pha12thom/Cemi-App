@@ -25,18 +25,16 @@
             align-items: center;
         }
 
-        #loader .spinner-border {
-            width: 3rem;
-            height: 3rem;
+        #loader img {
+            width: 100px; /* Adjust as needed */
+            height: 100px; /* Adjust as needed */
         }
     </style>
 </head>
 <body>
     <!-- Loader HTML -->
     <div id="loader">
-        <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
+        <img src="{% static 'cart.png' %}" alt="Loading..." label="loading...." style="color: purple; border-radius: 50px;">
     </div>
 
     {% if messages %}
