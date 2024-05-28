@@ -64,7 +64,10 @@
         }
         /* Custom Header Styles */
         header {
-            background-color: #f8f9fa;
+            background: black;
+            background-image: url("{% static 'navbar-bg.jpg' %}"); /* Add your background image here */
+            background-size: cover;
+            background-repeat: no-repeat;
             padding: 10px 0;
             border-bottom: 1px solid #e3e6e8;
         }
@@ -72,44 +75,69 @@
             width: 100px; /* Adjust logo size */
             border-radius: 30px;
         }
+        /* Navbar Animation */
+        .navbar {
+            background: rgba(0, 0, 0, 0.7); /* Semi-transparent background for navbar */
+        }
+        .navbar-nav .nav-link {
+            color: white !important;
+            transition: color 0.3s;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #f39c12 !important;
+        }
+        .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=UTF8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%2872, 72, 72, 0.5%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        }
         /* Footer Styles */
         footer {
-            background-color: #343a40;
-            color: #fff;
-            padding: 40px 0;
+            background: black;
+            color: white;
+            padding: 20px 0;
         }
-        footer .footer-links a {
-            color: #ddd;
+        footer a {
+            color: #f39c12;
             text-decoration: none;
+            transition: color 0.3s;
         }
-        footer .footer-links a:hover {
-            color: #fff;
-            text-decoration: underline;
+        footer a:hover {
+            color: white;
         }
-        footer .social-icons a {
-            color: #ddd;
-            margin: 0 10px;
-            text-decoration: none;
-            font-size: 1.5em;
+        .footer-links a {
+            margin: 0 15px;
         }
-        footer .social-icons a:hover {
-            color: #fff;
+        .footer-links a:hover {
+            color: white;
         }
-        footer .subscribe-form input[type="email"] {
+        .social-icons a {
+            color: white;
+            margin-right: 10px;
+            transition: color 0.3s;
+        }
+        .social-icons a:hover {
+            color: #f39c12;
+        }
+        .subscribe-form input[type="email"] {
             width: 70%;
             padding: 10px;
+            margin-bottom: 10px;
             border: none;
-            border-radius: 5px 0 0 5px;
+            border-radius: 5px;
         }
-        footer .subscribe-form button {
-            padding: 10px;
+        .subscribe-form button {
+            padding: 10px 20px;
+            background: #f39c12;
             border: none;
-            background: #28a745;
             color: white;
-            border-radius: 0 5px 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
         }
-        footer .subscribe-form button:hover {
-            background: #218838;
+        .subscribe-form button:hover {
+            background: #e67e22;
         }
     </style>
 </head>
@@ -129,7 +157,7 @@
 
     <!-- Header -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{% url 'home' %}">
                     <img src="{% static 'cemi.png' %}" alt="Cemi Store Logo" width="70px">
@@ -171,14 +199,14 @@
                     </form>
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'cart' %}"> <img src="{% static 'cart.png' %}" alt="cart" width="30px">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="badge bg-danger">{{ total_quantity }}</span>
+                            </a>
+                        </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'cart' %}">
-                                    <i class="fas fa-shopping-cart"></i>
-                                    <span class="badge bg-danger">{{ total_quantity }}</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'user_profile' %}">Profile</a>
+                                <a class="nav-link" href="{% url 'user_profile' %}"> {{ request.user.username }}'s profile</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'user_logout' %}">Logout</a>
@@ -188,11 +216,11 @@
                                 <a class="nav-link" href="{% url 'user_login' %}">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'user_register' %}">Register</a>
+                                <a class="nav-link" href="{% url 'user_register' %}">Sign Up</a>
                             </li>
                         {% endif %}
                         <li class="nav-item">
-                            <a class="nav-link" href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a class="nav-link" href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
@@ -206,26 +234,13 @@
         </nav>
     </header>
 
-    <!-- Sidebar -->
-    <div id="sidebar" class="sidebar">
-        <button id="close-sidebar" class="btn btn-danger">&times;</button>
-        <a href="{% url 'user_profile' %}" onclick="closeMenu()">User profile</a>
-        <a href="{% url 'home' %}" onclick="closeMenu()">Home</a>
-        <a href="{% url 'shop' %}" onclick="closeMenu()">Shop</a>
-        <a href="{% url 'orders' %}" onclick="closeMenu()">My orders</a>
-        <a href="{% url 'about' %}" onclick="closeMenu()">About us</a>
-        {% if cart %}     
-            <a href="{% url 'cart' %}" onclick="closeMenu()" style="color: red;"><img src="{% static 'cart.png' %}" width="30px">{{ total_quantity }}</a>            
-        {% endif %}
+    <!-- Content Block -->
+    <div class="container mt-5">
+        {% block content %}
+        {% endblock %}
     </div>
 
-    <div class="container-fluid">
-        <div class="row">
-            <main class="col-md-12 ms-sm-auto col-lg-10 px-md-4">
-                {% block content %}{% endblock %}
-            </main>
-        </div>
-    </div>
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="row">
@@ -268,24 +283,15 @@
     </footer>
 
     <script>
-        // Loader
-        $(window).on('load', function() {
-            $('#loader').fadeOut(3000); // Increase the duration to 3000ms (3 seconds)
-        });
-    
-        // Sidebar toggle
-        document.getElementById('toggle-sidebar').addEventListener('click', function() {
-            document.getElementById('sidebar').classList.add('active');
-        });
-    
-        document.getElementById('close-sidebar').addEventListener('click', function() {
-            document.getElementById('sidebar').classList.remove('active');
-        });
-    
-        function closeMenu() {
-            document.getElementById('sidebar').classList.remove('active');
+        // Sidebar toggle function
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('active');
         }
+
+        // Hide loader after page load
+        window.addEventListener('load', function() {
+            document.getElementById('loader').style.display = 'none';
+        });
     </script>
-    
 </body>
 </html>
