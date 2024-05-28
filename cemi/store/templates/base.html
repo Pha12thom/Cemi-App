@@ -32,6 +32,9 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        button.navbar-toggler {
+            background-color: #eb9e42;
+        }
         /* Sidebar Styles */
         .sidebar {
             position: fixed;
@@ -184,9 +187,12 @@
                                 <li><a class="dropdown-item" href="{% url 'shop_category' 'televisions' %}">Televisions</a></li>
                                 <li><a class="dropdown-item" href="{% url 'shop_category' 'shoes' %}">Shoes</a></li>
                                 <li><a class="dropdown-item" href="{% url 'shop_category' 'cutleries' %}">Cutleries</a></li>
-                                <li><a class="dropdown-item" href="{% url 'shop_category' 'electrical_appliances' %}">Electricals</a></li>
-                                <li><a class="dropdown-item" href="{% url 'shop_category' 'clothes' %}">Clothes</a></li>
+                                <li><a class="dropdown-item" href="{% url 'shop_category' 'electrical_appliances' %}">Electronics</a></li>
+                                <li><a class="dropdown-item" href="{% url 'shop_category' 'clothes' %}"></a></li>
+                                <li><a class="dropdown-item" href="{% url 'shop_category' 'accessories' %}">Accessories</a></li>
+                                <li><a class="dropdown-item" href="{% url 'shop_category' 'phones' %}">phones</a></li>
                                 <li><a class="dropdown-item" href="{% url 'shop_category' 'housewares' %}">Housewares</a></li>
+                               
                             </ul>
                         </li>
                         <li class="nav-item">

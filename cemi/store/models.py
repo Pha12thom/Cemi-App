@@ -36,10 +36,12 @@ class items(models.Model):
     ]
     CATEGORY_CHOICES = [
         ('televisions', 'Televisions'),
+        ('phones', 'Phones'),
         ('shoes', 'Shoes'),
         ('cutleries', 'Cutleries'),
         ('electrical_appliances', 'Electrical Appliances'),
         ('clothes', 'Clothes'),
+        ('accessories', 'Accessories'),
         ('housewares', 'Housewares'),
         # Add more categories as needed
     ]

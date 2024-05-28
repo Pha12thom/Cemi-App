@@ -5,14 +5,14 @@
 
 {% block content %}
 <section class="hero">
-    <p>Discover a wide range of products. Welcome to Cemi Online Store, your one-stop destination for all your home equipment needs. Whether you're looking for kitchen appliances, furniture, electronics, or any other essential items for your home, we have a wide range of high-quality products to choose from. Our store is designed to provide you with a seamless shopping experience, allowing you to browse through our extensive collection and find exactly what you're looking for. With our user-friendly interface and secure payment options, you can shop with confidence and convenience. We are committed to delivering exceptional customer service and ensuring your satisfaction with every purchase. So why wait? Start exploring our featured products and discover the perfect additions to your home today. Shop now and transform your living space into a haven of comfort and style.</p>
+    <p>Welcome to Cemi Online Store, your one-stop shop for high-quality home equipment, offering a seamless and secure shopping experience. Shop now to transform your home with our extensive collection of kitchen appliances, furniture, electronics, and more.</p>
 </section>
 
 <div class="container my-5">
     <h1 class="text-center">Shop by Category</h1>
     <div class="row justify-content-center">
         <div class="col-md-2 m-2">
-            <a href="{% url 'shop_category' 'televisions' %}" class="btn btn-outline-primary w-100">Televisions</a>
+            <a href="{% url 'shop_category' 'televisions' %}" class="btn btn-outline-primary w-100">TV'S & Laptops</a>
         </div>
         <div class="col-md-2 m-2">
             <a href="{% url 'shop_category' 'shoes' %}" class="btn btn-outline-primary w-100">Shoes</a>
@@ -21,10 +21,16 @@
             <a href="{% url 'shop_category' 'cutleries' %}" class="btn btn-outline-primary w-100">Cutleries</a>
         </div>
         <div class="col-md-2 m-2">
-            <a href="{% url 'shop_category' 'electrical_appliances' %}" class="btn btn-outline-primary w-100">Electrical</a>
+            <a href="{% url 'shop_category' 'electrical_appliances' %}" class="btn btn-outline-primary w-100">Electronics</a>
         </div>
         <div class="col-md-2 m-2">
             <a href="{% url 'shop_category' 'clothes' %}" class="btn btn-outline-primary w-100">Clothes</a>
+        </div>
+        <div class="col-md-2 m-2">
+            <a href="{% url 'shop_category' 'cuttleries' %}" class="btn btn-outline-primary w-100">Electrical Appliances</a>
+        </div>
+        <div class="col-md-2 m-2">
+            <a href="{% url 'shop_category' 'accessories' %}" class="btn btn-outline-primary w-100">Accessories</a>
         </div>
         <div class="col-md-2 m-2">
             <a href="{% url 'shop_category' 'housewares' %}" class="btn btn-outline-primary w-100">Housewares</a>
