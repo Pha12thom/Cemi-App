@@ -201,12 +201,15 @@
                         {% if request.user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'cart' %}"> <img src="{% static 'cart.png' %}" alt="cart" width="30px">
-                                <i class="fas fa-shopping-cart"></i>
-                                <span class="badge bg-danger">{{ total_quantity }}</span>
+                                <i class="fas fa-shopping-cart"><span class="badge bg-danger">{{ total_quantity }}</span></i>
+                              
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'user_profile' %}"> {{ request.user.username }}'s profile</a>
+                                <a class="nav-link" href="{% url 'user_profile' %}" style="background-color:#e67e22; border-radius: 30px;">
+                                    {{ request.user.username }}
+                                    <i class="fas fa-chevron-down"></i>
+                                </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'user_logout' %}">Logout</a>
