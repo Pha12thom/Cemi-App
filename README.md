@@ -79,7 +79,7 @@ This project is licensed under the [MIT License](LICENSE).
 - PayPal Developer Documentation
 
 ## Support
-For any inquiries or assistance, please contact us at [geofreymilugo@gmail.com](mailto:contact@example.com).
+For any inquiries or assistance, please contact us at [geofreymilugo@gmail.com](mailto:geofreymilugo@gmail.com).
 
 ## Version History
 - **v1.0.0** (2024-05-28): Initial release
