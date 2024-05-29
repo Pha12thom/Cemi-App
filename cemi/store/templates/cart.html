@@ -3,41 +3,70 @@
 {% block title %}Cart{% endblock %}
 {% block heading %}View items in your cart {% endblock %}
 {% block content %}
+<style>
+    .cart-container {
+        margin-top: 30px;
+    }
+    .cart-item-image {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+    }
+    .cart-summary {
+        margin-top: 20px;
+    }
+    .thead-dark {
+        background-color: #343a40;
+        color: white;
+    }
+    @media (max-width: 768px) {
+        .table {
+            font-size: 0.9rem;
+        }
+        .cart-item-image {
+            width: 50px;
+            height: 50px;
+        }
+    }
+</style>
+
 {% if cart %}
     <div class="container cart-container">
         <h1 class="text-center my-4">Your Cart</h1>
-        <table class="table table-hover">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Item</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Total</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item, total_item_price in items_with_prices %}
-                <tr>
-                    <td class="align-middle">
-                        <div class="d-flex align-items-center">
-                            <img src="{{ item.images.url }}" alt="{{ item.name }}" class="cart-item-image img-thumbnail mr-3">
-                            <span>{{ item.name }}</span>
-                        </div>
-                    </td>
-                    <td class="align-middle">ksh. {{ item.price }}</td>
-                    <td class="align-middle">{{ item.quantity }}</td>
-                    <td class="align-middle">ksh. {{ total_item_price }}</td>
-                    <td class="align-middle">
-                        <form action="{% url 'reduce_item_quantity' item_id=item.id %}" method="post" class="d-inline">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-danger btn-sm">Reduce Quantity</button>
-                        </form>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Item</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item, total_item_price in items_with_prices %}
+                    <tr>
+                        <td class="align-middle">
+                            <div class="d-flex align-items-center">
+                                <img src="{{ item.images.url }}" alt="{{ item.name }}" class="cart-item-image img-thumbnail mr-3">
+                                <span>{{ item.name }}</span>
+                            </div>
+                        </td>
+                        <td class="align-middle">ksh. {{ item.price }}</td>
+                        <td class="align-middle">{{ item.quantity }}</td>
+                        <td class="align-middle">ksh. {{ total_item_price }}</td>
+                        <td class="align-middle">
+                            <form action="{% url 'reduce_item_quantity' item_id=item.id %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">Reduce Quantity</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
         <div class="cart-summary text-right">
             <p class="mb-1">Quantity of items: {{ total_quantity }}</p>
             <p class="font-weight-bold">Total: ksh. {{ total_price }}</p>

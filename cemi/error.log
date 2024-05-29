@@ -1,0 +1,108 @@
+Internal Server Error: /favicon.ico
+Internal Server Error: /ws/ws
+Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\cemi\store\views.py", line 282, in shop
+    return render(request, 'shop.html', context)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\templatetags\static.py", line 116, in render
+    url = self.url(context)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\templatetags\static.py", line 113, in url
+    return self.handle_simple(path)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\templatetags\static.py", line 129, in handle_simple
+    return staticfiles_storage.url(path)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\contrib\staticfiles\storage.py", line 203, in url
+    return self._url(self.stored_name, name, force)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\contrib\staticfiles\storage.py", line 182, in _url
+    hashed_name = hashed_name_func(*args)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\contrib\staticfiles\storage.py", line 513, in stored_name
+    raise ValueError(
+ValueError: Missing staticfiles manifest entry for 'navbar-bg.jpg'
+"GET /favicon.ico HTTP/1.1" 500 145
+"GET /ws/ws HTTP/1.1" 500 145
+"GET / HTTP/1.1" 500 145
+Internal Server Error: /favicon.ico
+Internal Server Error: /ws/ws
+"GET /favicon.ico HTTP/1.1" 500 145
+"GET /ws/ws HTTP/1.1" 500 145
+Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\cemi\store\views.py", line 282, in shop
+    return render(request, 'shop.html', context)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\template\base.py", line 175, in render
+    return self._render(context)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\template\loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\template\base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\template\base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\template\base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\template\base.py", line 966, in render_annotated
+    return self.render(context)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\templatetags\static.py", line 116, in render
+    url = self.url(context)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\templatetags\static.py", line 113, in url
+    return self.handle_simple(path)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\templatetags\static.py", line 129, in handle_simple
+    return staticfiles_storage.url(path)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\contrib\staticfiles\storage.py", line 203, in url
+    return self._url(self.stored_name, name, force)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\contrib\staticfiles\storage.py", line 182, in _url
+    hashed_name = hashed_name_func(*args)
+  File "C:\Users\Milugo Geofrey\Music\Cemi-App\venv\lib\site-packages\django\contrib\staticfiles\storage.py", line 513, in stored_name
+    raise ValueError(
+ValueError: Missing staticfiles manifest entry for 'navbar-bg.jpg'
+"GET / HTTP/1.1" 500 145
+Internal Server Error: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 500 145
+Internal Server Error: /ws/ws
+"GET /ws/ws HTTP/1.1" 500 145

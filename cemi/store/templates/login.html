@@ -48,31 +48,19 @@
     #login-btn:hover {
         background-color: #0056b3;
     }
-  
-    
     .container {
         max-width: 800px;
         margin: 100px auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #fff;
         padding: 30px;
         border-radius: 10px;
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
     }
-    
-    .form-container {
-        flex: 1;
-        padding-right: 30px;
-    }
-    
-    .form-container h1 {
+    .form-container h1, .description h2 {
         font-size: 24px;
         margin-bottom: 20px;
         color: #333;
     }
-    
     .form-container input[type="text"],
     .form-container input[type="email"],
     .form-container input[type="password"] {
@@ -83,13 +71,11 @@
         border-radius: 5px;
         outline: none;
     }
-    
     .form-container input[type="text"]:focus,
     .form-container input[type="email"]:focus,
     .form-container input[type="password"]:focus {
         border-color: #4CAF50;
     }
-    
     .form-container button {
         background-color: #4CAF50;
         color: white;
@@ -99,32 +85,20 @@
         cursor: pointer;
         font-size: 16px;
     }
-    
     .form-container button:hover {
         background-color: #45a049;
     }
-    
-    .description {
-        flex: 1;
-        padding-left: 30px;
-        background-image: url('main.jpg');
-        background-size: cover; /* Ensures the background image covers the entire container */
-        background-position: center; /* Centers the background image within the container */
-        color: #0c0303; /* Set text color to white for better visibility */
-    }
-    
-    
-    .description h2 {
-        font-size: 24px;
-        margin-bottom: 20px;
-        
-    }
-    
     .description p {
         font-size: 16px;
-       
     }
-   
-   
+    @media (max-width: 768px) {
+        .form-container, .description {
+            margin-top: 20px;
+            padding: 20px;
+        }
+        .container {
+            padding: 20px;
+        }
+    }
 </style>
 {% endblock %}
