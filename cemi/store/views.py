@@ -437,3 +437,6 @@ def shop_category(request, category):
         'total_quantity': total_quantity,
     }
     return render(request, 'shop_category.html', context)
+
+def landing_page(request):
+    return render(request, 'landing_page.html')
