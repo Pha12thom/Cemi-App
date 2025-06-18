@@ -145,16 +145,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #activate account by email
 
 # Email settings
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'celestinbor02@gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'geofreymilugo@gmail.com'
-EMAIL_HOST_PASSWORD = 'lejsklreeidzuzmp'
+EMAIL_HOST_USER = 'celestinbor02@gmail.com'
+EMAIL_HOST_PASSWORD = 'host#1234'
 EMAIL_USE_TLS = True  # or False if you're using SSL
 
 # Email activation settings
 ACCOUNT_ACTIVATION_DAYS = 7  # Number of days for activation link to remain valid
-EMAIL_FROM = 'geofreymilugo@gmail.com'  # Sender's email address for activation emails
+EMAIL_FROM = 'celestinbor02@gmail.com'  # Sender's email address for activation emails
 
 
 
